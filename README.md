@@ -8,7 +8,10 @@ The program we are creating will be a shell called RShell. It will have some of 
 # Diagram:
 
 # Classes:
-
+Our classes will be derived from an interface that we will call "Input"
+Input will be similar to the interface for the second lab
+The connector class will be a composite class. This class will be similar to the operator class from the third lab. It will be a binary operator which will have pointers to two input classes.
+The command class will be a leaf class that will run an executable with the operands that are given by execvp()
 # Prototypes/Research:
 
 # Developing and Testing Roadmap:
