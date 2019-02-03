@@ -29,6 +29,11 @@ When running a basic program to examine the behavior of fork(),
 ```
 we get the output:
 testpid = 38811
+0
+38812
+0
+
+note: declaring a variable =fork() will result in an instance of fork running.
 
 After the first cout line I decided to test adding  `cout << "testing raw fork" << fork() << endl;`
 which was interesting because it returned: 
@@ -46,6 +51,8 @@ So fork appears to create branches within branches of another process? Every 0 i
 
 
 Adding more functionality: using execvp to run command:
+	
+
 
 
 
@@ -53,4 +60,34 @@ Adding more functionality: using execvp to run command:
 Note: The execvp() function takes in a char* const* variable
 
 # Developing and Testing Roadmap:
+
+Steps:
+
+Develop the basic command shell that takes commands and connectors
+
+	classes&stuff :
+	Input - J
+	Command	- K
+	Execute*? - J
+	main.cpp - K
+
+	unit tests : 
+	forking properly - K
+	commands are running properly - K
+	ensure the program works as a whole - J
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
