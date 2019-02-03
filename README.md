@@ -19,6 +19,6 @@ The connector will be a flag placed in composite class. It will function similar
 Execute
     When all Command objects are done being made, the execute class will carry out the commands following the connectors. 
 # Prototypes/Research:
-
+Note: The execvp() function takes in a char* const* variable
 # Developing and Testing Roadmap:
 
