@@ -21,7 +21,7 @@ Execute
     When all Command objects are done being made, the execute class will carry out the commands following the connectors. 
 # Prototypes/Research:
 
-When running a basic program to examine the behavior of fork(),
+Running a basic program to examine the behavior of fork(),
 ```
     pid_t testpid = fork();
 
@@ -47,14 +47,63 @@ testing raw fork
 38878
 0
 
-So fork appears to create branches within branches of another process? Every 0 is a signal that the program successfully forked from the parent processes, which denotes the end of the process tree. Another note, the parent process IDs (non 0's) appear to iterate +1 every new process. In total from 2 cout fork calls, we get 6 calls to cout: original parent + 2 calls of the other fork() + child's version of the 2 other calls
+So fork appears to create branches within branches of another process? Every 0 is a signal that the program successfully forked from the parent processes, which denotes the end of the process tree. Another note, the parent process IDs (non 0's) appear to iterate +1 every new process. In total from 2 cout fork calls, we get 6 calls to cout: original parent + 2 calls of the other fork() + child's version of the 2 other calls.	
 
 
-Adding more functionality: using execvp to run command:
-	
+Prototype with the 3 functions together:
+
+```
+nclude <unistd.h>
+#include <iostream>
+#include <string>
+#include <sys/types.h>
+#include <sys/wait.h>
+using namespace std;
+int main(int argc, char** argv){
+
+      //fork prototype
+
+    int status;
+      pid_t testpid = fork();
+      cout << "pid_t = testpid = fork();" << endl;
 
 
+    execvp(argv[1] , argv + 1);
+    cout << "execvp argv[1] argv + 1;" << endl;
 
+
+    waitpid(testpid, &status, 0);
+        cout << "waitpid created with testpid " << endl;
+
+      //cout << "testpid = " << testpid << endl;
+
+      //cout << "testing raw fork" << endl;
+
+      //cout << fork() << endl;
+    //execvp prototype
+    execvp(argv[1] , argv + 1);
+        cout << "execvp argc1, argv + 1; " << endl;
+
+
+        if (testpid == -1)
+        {
+                cout << "-1 error" << endl;
+        }
+        if (testpid == 0)
+        {
+                cout << "0, successfully forked back " << endl;
+        }
+        if (testpid > 0)
+        {
+                cout << "child process starts" << endl;
+        }
+
+
+    return 0;
+}
+```
+
+Note: when entering 2 noncommand arguments when running ./a.out, more process instances are ran through the forks. When entering "echo hello", the program echoes hello twice after announcing "testpid was initialized" echoes twice, but program ends after the first execvp statement.
 
 
 Note: The execvp() function takes in a char* const* variable
@@ -75,7 +124,7 @@ Develop the basic command shell that takes commands and connectors
 	forking properly - K
 	commands are running properly - K
 	ensure the program works as a whole - J
-	
+Assignments subject to change	
 
 
 
