@@ -7,6 +7,7 @@ Jeffery Lai 862043827
 The program we are creating will be a shell called RShell. It will have some of the capabilities of the current shell we use, bash. This includes printing a command prompt, taking in user input, and translating those commands into services that the user requests. For this assignment, we will use the Composite Pattern as our framework for the program. This is important as the user will be entering different inputs and the having a composite pattern will allow the user to treat all the objects in the program in the same manner.
 # Diagram:
 //insert image url
+![UML](https://github.com/cs100/assignment-cs100_jeffery_and_kevin/blob/master/images/UML%20Shell.jpeg?raw=true)
 # Classes:
 Our classes will be derived from an interface that we will call "Input"
 Input
@@ -19,6 +20,7 @@ The connector will be a flag placed in composite class. It will function similar
 Execute
     When all Command objects are done being made, the execute class will carry out the commands following the connectors. 
 # Prototypes/Research:
+
 When running a basic program to examine the behavior of fork(),
 ```
     pid_t testpid = fork();
@@ -43,10 +45,12 @@ testing raw fork
 So fork appears to create branches within branches of another process? Every 0 is a signal that the program successfully forked from the parent processes, which denotes the end of the process tree. Another note, the parent process IDs (non 0's) appear to iterate +1 every new process. In total from 2 cout fork calls, we get 6 calls to cout: original parent + 2 calls of the other fork() + child's version of the 2 other calls
 
 
-Adding more functionality: using execvp to run commands
+Adding more functionality: using execvp to run command:
 
 
 
+
+Note: The execvp() function takes in a char* const* variable
 
 # Developing and Testing Roadmap:
 
