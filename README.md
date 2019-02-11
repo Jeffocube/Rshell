@@ -127,7 +127,7 @@ Develop the basic command shell that takes commands and connectors
 Assignments subject to change	
 
 
-[KanBan]https://github.com/cs100/assignment-cs100_jeffery_and_kevin/projects/1
+[KanBan](https://github.com/cs100/assignment-cs100_jeffery_and_kevin/projects/1)
 
 
 
