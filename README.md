@@ -16,9 +16,12 @@ Input
 Command 
     COMPOSITE class. Used as a base for all the possible commands that will be executed.
 The connector will be a flag placed in composite class. It will function similarly to the operator classes from the composite pattern lab in the way that it is passed as a parameter that decides if another Command object will execute, similar to if a Base type object was passed in as a paramter in the operator class from the lab.
-
+Parse
+    We may turn parse into an abstract factory class in order to create our command objects.
 Execute
-    When all Command objects are done being made, the execute class will carry out the commands following the connectors. 
+    When all Command objects are done being made, the execute class will carry out the commands following the connectors. Execute will also have a helper function which will actually execute the command(if it has one) and then run execute on it's children(located inside their vector).
+Connector
+    We will have a derived class from input called "connector" which, when executed, will retrieve the iterator in the for loop that iterates through the command vector and also take in a bool from the last executed command which will return either true or false. From then, the connector will either iterate or do nothing depending on the status of the last run command.
 # Prototypes/Research:
 
 Running a basic program to examine the behavior of fork(),
