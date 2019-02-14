@@ -7,9 +7,6 @@
 #include <sys/wait.h>
 #include "input.h"
 
-void executeHelper(int num, char** passArgc){
-      
-}
 
 
 #endif

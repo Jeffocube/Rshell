@@ -1,5 +1,6 @@
 #ifndef COMMAND_H
 #define COMMAND_H
+#include <vector>
 #include <unistd.h>
 #include <iostream>
 #include <string>
@@ -8,25 +9,33 @@
 #include "input.h"
 using namespace std;
 
-class command : public Input{
+class commandComp : public Input{
     private:
-        enum connector; 
-        string activity;
-        vector<string> args;
         vector<Input*> comm;
     public:
-        command(enum conn, string act, vector<string> args, vector<Input*> comm){
-            connector = conn;
-            activity = act;
-            this->args = args;
+        commandComp(vector<Input*> comm){
             this->comm = comm;
         }
-        void execute(){
-            this->executeHelper();
+        bool execute(){
             unsigned numChildren = comm.size();
             for(unsigned i = 0; i < numChildren; i++){
                 comm.at(i)->execute();
             }
         }
+};
+class commandLeaf : public Input{
+    private:
+        string activity;
+        vector<string> args;
+    public:
+        commandLeaf(string activity, vector<string> args){
+            this->activity = activity;
+            this->args = args;
+        }
+        bool execute(){
+            
+        
+        }
+
 };
 #endif
