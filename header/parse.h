@@ -14,7 +14,7 @@ using namespace std;
 void parse(string userInput, vector<Input*> outVector)
 {
 	int marker = 0;
-	vector<string> commandStorage; //putting everything in her
+	vector<string> commandStorage; //putting everything in here
 	for (int i = 0; i < userInput.size(); i++)
 	{
 		if (userInput.at(i) == ';') // || userInput.at(i) == '|') 
@@ -25,8 +25,8 @@ void parse(string userInput, vector<Input*> outVector)
 
 			marker = i+2; //assume next char is ' '
 			i+=2;
-			//notdone
-		}//break into
+		
+		}
 		else if (userInput.at(i) == '&' || userInput.at(i) == '|')
 		{
 			if (i != userInput.size() - 1)
@@ -45,9 +45,8 @@ void parse(string userInput, vector<Input*> outVector)
 	}
 
 
-return;
 
-
+	//use the strings (commands and connectors) in commandStorage to
 	//create commandLeaf objects to place in outVector
 	
 	
