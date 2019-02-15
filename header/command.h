@@ -16,7 +16,7 @@ class commandComp : public Input{
         commandComp(vector<Input*> comm){
             this->comm = comm;
         }
-        bool execute(){
+        bool execute(int* i){
             unsigned numChildren = comm.size();
             for(unsigned i = 0; i < numChildren; i++){
                 comm.at(i)->execute();
@@ -27,12 +27,16 @@ class commandLeaf : public Input{
     private:
         string activity;
         vector<string> args;
+        bool pass = true;
     public:
+        bool getPass(){
+            return pass;
+        }
         commandLeaf(string activity, vector<string> args){
             this->activity = activity;
             this->args = args;
         }
-        bool execute(){
+        bool execute(int* i){
             
         
         }
