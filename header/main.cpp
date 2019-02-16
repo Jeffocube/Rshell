@@ -1,17 +1,22 @@
 #include <iostream>
-#include "parse.h"
-
+#include <vector>
+#include <unistd.h>
+#include <iostream>
+#include <string>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+#include "input.h"
+#include "command.h"
 using namespace std;
 
-int main()
-{
-//testing shit
-	string input;
-//	cout << "cin an input string " << endl;
-//	cin >> input;
-	cout << endl;
-
-	vector<Input*> irrelevant4now;
-	input = "hello I like apples; I like apples && oranges; Testtest || 123 test test ; testing, dont  think last one shows yet though";
-	parse(input, irrelevant4now);
+int main(){
+	vector<string> newVec;
+	newVec.push_back("hello");
+	newVec.push_back("world");
+	commandLeaf ncom = commandLeaf("echo", newVec);
+	int* k = new int(1);
+	ncom.execute(k);
+	cout << "again2" << endl;
+	exit(0);
 }

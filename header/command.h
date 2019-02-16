@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include "input.h"
+#include <cstring>
 using namespace std;
 
 class commandComp : public Input{
@@ -36,7 +37,7 @@ class commandLeaf : public Input{
     private:
         string activity;
         vector<string> args;
-        bool pass = false;
+        bool pass;
     public:
         bool getPass(){
             return pass;
@@ -44,11 +45,29 @@ class commandLeaf : public Input{
         commandLeaf(string activity, vector<string> args){
             this->activity = activity;
             this->args = args;
+            pass = false;
         }
         bool execute(int* i){
-            cout << "Hello3" << endl;
-        
+            int k = args.size();
+            pid_t childPid;
+            int status;
+            char *argIn[k];
+            string str1;
+            char* str2;
+            int t = 0;
+            for(t = 0; t < k; t++){
+                str2 = strcpy(argIn[t], args.at(t).c_str());
+            }
+            argIn[k] = NULL;
+        	childPid = fork();
+        	if(childPid == 0){
+                execvp("echo", argIn - 1);
+        	}else{
+        		waitpid(childPid, &status, 0);
+        		if(status == 0){
+        		    pass = true;
+        		}
+        	}
         }
-
 };
 #endif
