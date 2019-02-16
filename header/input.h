@@ -10,7 +10,8 @@ using namespace std;
 
 class Input{
     public:
-        virtual bool execute();
+        virtual bool execute(int* ) = 0;
+        virtual bool getPass() = 0;
 };
 
 #endif

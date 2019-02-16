@@ -6,6 +6,7 @@
 #include <string>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <stdlib.h>
 #include "input.h"
 using namespace std;
 
@@ -17,10 +18,18 @@ class commandComp : public Input{
             this->comm = comm;
         }
         bool execute(int* i){
-            unsigned numChildren = comm.size();
-            for(unsigned i = 0; i < numChildren; i++){
-                comm.at(i)->execute();
+            int numChildren = comm.size();
+            for(int k = 0; k < numChildren; k++){
+                cout << k << endl;
+                cout << "EXECUTING" << endl;
+                comm.at(k)->execute(&k);
             }
+        }
+        bool getInComm(int i){
+            return comm.at(i)->getPass();
+        }
+        bool getPass(){
+            return true;
         }
 };
 class commandLeaf : public Input{
@@ -37,7 +46,7 @@ class commandLeaf : public Input{
             this->args = args;
         }
         bool execute(int* i){
-            
+            cout << "Hello3" << endl;
         
         }
 
