@@ -36,7 +36,7 @@ class commandLeaf : public Input{
     private:
         string activity;
         vector<string> args;
-        bool pass = true;
+        bool pass = false;
     public:
         bool getPass(){
             return pass;
