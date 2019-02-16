@@ -13,8 +13,8 @@ using namespace std;
 class Exit : public Input{
     public:
     Exit(){ }
-    bool execute(int* i){
-        cout << "Hello4" << endl;
+    int execute(int i){
+        // cout << "Hello4" << endl;
         exit(0);
     }
     bool getPass(){

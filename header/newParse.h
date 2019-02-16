@@ -25,15 +25,15 @@ using namespace std;
                     i++;
                 }i++;
                 if(temp != "exit"){
-                vector<string> tempStrVec;
-                while(inp.at(i) != '0' && inp.at(i) != '|' && inp.at(i) != '&' && inp.at(i) != ';'){
-                    string temp1;
-                    while(inp.at(i) != ' '){
-                        temp1 += inp.at(i);
-                        i++;
-                    }i++;
-                    tempStrVec.push_back(temp1);
-                }
+                    vector<string> tempStrVec;
+                    while(inp.at(i) != '0' && inp.at(i) != '|' && inp.at(i) != '&' && inp.at(i) != ';'){
+                        string temp1;
+                        while(inp.at(i) != ' '){
+                            temp1 += inp.at(i);
+                            i++;
+                        }i++;
+                        tempStrVec.push_back(temp1);
+                    }
                     fillThis.push_back(new command);
                 }
             }

@@ -15,15 +15,15 @@ class commandComp : public Input{
     private:
         vector<Input*> comm;
     public:
-        commandComp(vector<Input*> comm){
-            this->comm = comm;
+        commandComp(){
         }
-        bool execute(int* i){
+        void setVec(vector<Input*> vec){
+            comm = vec;
+        }
+        int execute(int i){
             int numChildren = comm.size();
             for(int k = 0; k < numChildren; k++){
-                cout << k << endl;
-                cout << "EXECUTING" << endl;
-                comm.at(k)->execute(&k);
+                k = comm.at(k)->execute(k);
             }
         }
         bool getInComm(int i){
@@ -47,7 +47,7 @@ class commandLeaf : public Input{
             this->args = args;
             pass = false;
         }
-        bool execute(int* i){
+        int execute(int i){
             int k = args.size();
             pid_t childPid;
             int status;
@@ -56,18 +56,21 @@ class commandLeaf : public Input{
             char* str2;
             int t = 0;
             for(t = 0; t < k; t++){
-                str2 = strcpy(argIn[t], args.at(t).c_str());
+                argIn[t] = &args.at(t)[0u];
             }
             argIn[k] = NULL;
         	childPid = fork();
         	if(childPid == 0){
-                execvp("echo", argIn - 1);
+                if(execvp(activity.c_str(), argIn - 1) != 0){
+                    exit(1);
+                }
         	}else{
         		waitpid(childPid, &status, 0);
         		if(status == 0){
         		    pass = true;
         		}
         	}
+        	return i;
         }
 };
 #endif
