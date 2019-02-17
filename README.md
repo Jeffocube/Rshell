@@ -11,17 +11,16 @@ The program we are creating will be a shell called RShell. It will have some of 
 # Classes:
 Our classes will be derived from an interface that we will call "Input"
 Input
-    will act as the interface similar to the lab examples. Contains Command and the Execution of those commands.
+    will act as the interface similar to the lab examples. Contains Commands and the Execution of those commands. Below are classes that derive from the Input class.
 
-Command 
-    COMPOSITE class. Used as a base for all the possible commands that will be executed.
-The connector will be a flag placed in composite class. It will function similarly to the operator classes from the composite pattern lab in the way that it is passed as a parameter that decides if another Command object will execute, similar to if a Base type object was passed in as a paramter in the operator class from the lab.
-Parse
-    We may turn parse into an abstract factory class in order to create our command objects.
-Execute
-    When all Command objects are done being made, the execute class will carry out the commands following the connectors. Execute will also have a helper function which will actually execute the command(if it has one) and then run execute on it's children(located inside their vector).
+Commands
+    We will have two command classes. The first is a composite called commandComp, this will encompass all other commands/inputs and will contain a vector that contains all these inputs. The second is commandLeaf which will contain the actual commands themself. When execute is called on commandComp, it will call execute on the commandLeaf and commandLeaf will execute a command such as "echo hello world". commandLeaf contains a string to the command called "activity" and a vector of arguments.
+
 Connector
-    We will have a derived class from input called "connector" which, when executed, will retrieve the iterator in the for loop that iterates through the command vector and also take in a bool from the last executed command which will return either true or false. From then, the connector will either iterate or do nothing depending on the status of the last run command.
+    The connector will be a special object that will influence the iterator used to run through the vector of the commandLeaf. This is done by taking in the commandComp object of which is the parent to the connector and the iterator pointer and then changing the iterator depending on how the last command went.
+
+Exit
+    The exit object will run the exit call to leave the program when executed.
 # Prototypes/Research:
 
 Running a basic program to examine the behavior of fork(),
