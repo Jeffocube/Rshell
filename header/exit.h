@@ -18,7 +18,7 @@ class Exit : public Input{
         exit(0);
     }
     bool getPass(){
-        return true;
+        return false;
     }
     
 };

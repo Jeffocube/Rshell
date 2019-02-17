@@ -9,23 +9,20 @@
 #include "input.h"
 #include "command.h"
 #include "connector.h"
+#include "exit.h"
+#include "newParse.h"
 using namespace std;
 
 int main(){
-	vector<string> newVec;
-	vector<string> nvec;
-	nvec.push_back("hello");
-	newVec.push_back("hello");
-	newVec.push_back("world");
-	commandComp cc = commandComp();
-	commandLeaf ncom = commandLeaf("echo", newVec);
-	commandLeaf nco = commandLeaf("echo", nvec);
-	Connector ncon = Connector("||", &cc);
-	vector<Input*> tempIn;
-	tempIn.push_back(&ncom);
-	tempIn.push_back(&ncon);
-	tempIn.push_back(&nco);
-	cc.setVec(tempIn);
-	cc.execute(1);
+	while(1){
+		string input;
+		int i = 1;
+		commandComp* command = new commandComp();
+		do{
+			cout << "$ ";
+			getline(cin, input);
+		}while(newParse(input, command));
+		command->execute(i);
+	}
 	exit(0);
 }

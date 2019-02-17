@@ -3,47 +3,32 @@
 #include <string>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <stdlib.h>
 using namespace std;
 int main(int argc, char** argv){
 
       //fork prototype
- 
+	pid_t childPid;
     int status;
-      pid_t testpid = fork();
-      cout << "pid_t = testpid = fork();" << endl;
-      
-
-    execvp(argv[1] , argv + 1);
-    cout << "execvp argv[1] argv + 1;" << endl;
-
-
-    waitpid(testpid, &status, 0);
-	cout << "waitpid created with testpid " << endl;
-
-      //cout << "testpid = " << testpid << endl;
-
-      //cout << "testing raw fork" << endl;
-
-      //cout << fork() << endl;
-    //execvp prototype
-    execvp(argv[1] , argv + 1);
-	cout << "execvp argc1, argv + 1; " << endl;
-
-
-	if (testpid == -1)
-	{
-		cout << "-1 error" << endl;
+	childPid = fork();
+	if(childPid == 0){
+		exit(1);
+	}else{
+		waitpid(childPid, &status, 0);
+		cout << status << endl;
 	}
-	if (testpid == 0)
-	{
-		cout << "0, successfully forked back " << endl;
-	}
-	if (testpid > 0)
-	{
-		cout << "child process starts" << endl;
-	}
-
-
-	cout << "end of program, testpid = " << testpid << endl;
+	
+	 char argv[3];
+    string string1;
+    string string2;
+    cin >> string1;
+    cin >> string2;
+    char str1 = &string1[0u];
+    char* str2 = &string2[0u];
+    argv[0] = str1;
+    argv[1] = str2;
+    argv[2] = NULL;
+    execvp(argv[0] , argv );
+	
     return 0;
 }

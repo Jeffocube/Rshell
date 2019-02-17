@@ -48,6 +48,7 @@ class commandLeaf : public Input{
             pass = false;
         }
         int execute(int i){
+            // cout << "executed" << endl;
             int k = args.size();
             pid_t childPid;
             int status;
