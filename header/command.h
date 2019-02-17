@@ -23,6 +23,7 @@ class commandComp : public Input{
         int execute(int i){
             int numChildren = comm.size();
             for(int k = 0; k < numChildren; k++){
+                // cout << "Executed" << endl;
                 k = comm.at(k)->execute(k);
             }
         }
@@ -30,6 +31,13 @@ class commandComp : public Input{
             return comm.at(i)->getPass();
         }
         bool getPass(){
+            return true;
+        }
+        int getSize(){
+            return comm.size();
+        }
+        bool setPass(bool b, int i){
+            comm.at(i)->setPass(b, i);
             return true;
         }
 };
@@ -47,8 +55,13 @@ class commandLeaf : public Input{
             this->args = args;
             pass = false;
         }
+        bool setPass(bool b, int i){
+            pass = b;
+            return true;
+        }
         int execute(int i){
             // cout << "executed" << endl;
+            // cout << activity << "<- did this" << endl;
             int k = args.size();
             pid_t childPid;
             int status;

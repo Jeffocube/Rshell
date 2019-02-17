@@ -22,17 +22,27 @@ class Connector : public Input{
             pass = false;
         }
         int execute(int i){
+            // cout << "Connector executed" << endl;
             // cout << "hello again" << endl;
             if(parent->getInComm(i - 1) == false && activity == "&&"){
+                parent->setPass(true, i + 1);
                 return i + 1;
             }else if(parent->getInComm(i - 1) == true && activity == "||"){
+                parent->setPass(true, i + 1);
                 return i + 1;
+            }else if(parent->getInComm(i - 1) == true && activity == ";"){
+                // cout << "SEMICOLON" << endl;
+                return i;
             }else{
                 return i;
             }
         }
         bool getPass(){
             return pass;
+        }
+        bool setPass(bool b, int i){
+            pass = b;
+            return true;
         }
 
 };

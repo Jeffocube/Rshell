@@ -12,6 +12,7 @@ class Input{
     public:
         virtual int execute(int ) = 0;
         virtual bool getPass() = 0;
+        virtual bool setPass(bool, int) = 0;
 };
 
 #endif

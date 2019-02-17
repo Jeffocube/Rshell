@@ -10,54 +10,73 @@
 #include <cstring>
 #include "connector.h"
 #include "command.h"
+#include "exit.h"
 using namespace std;
     bool newParse(string inp, commandComp* comp){
+        int i = 0;
+        bool start = true;
         vector<Input*> fillThis;
-        //beginning of the whole loop for parsing
-        for(int i = 0; i < inp.size(); i++){
-            //checks if it is not a connector
-                cout << inp.at(i) << endl;
-            if(inp.at(i) != '|' && inp.at(i) != '&' && inp.at(i) != ';'){
-                cout << inp.at(i) << endl;
-                string temp;
-                while( i < inp.size() && inp.at(i) != ' ' && inp.at(i) != '0'){
-                    temp += inp.at(i);
-                    i++;
-                }i++;
-                cout << temp << endl;
-                if(temp != "exit"){// if it is not "exit" the algorithm will continue to add on strings to a vector
-                    vector<string> tempStrVec;
-                    while(i < inp.size() && inp.at(i) != '0' && inp.at(i) != '|' && inp.at(i) != '&' && inp.at(i) != ';'){// this will loop and add to the vector until it encounters a connector or end
-                        string temp1;
-                        while(i < inp.size() && inp.at(i) != ' '){
-                            temp1 += inp.at(i);
-                            i++;
-                        }i++;
-                        tempStrVec.push_back(temp1);
-                    }
-                    fillThis.push_back(new commandLeaf(temp, tempStrVec));
-                }else{
-                    fillThis.push_back(new Exit());
-                }
-            }else if(inp.at(i) == '|' || inp.at(i) == '&'){
-                string tempConn;
-                cout << "through" << endl;
-                if(inp.at(i) == inp.at(i - 1)){
-                    tempConn += inp.at(i);
-                    tempConn += inp.at(i - 1);
-                    fillThis.push_back(new Connector(tempConn, comp));
-                    i++;
-                }else if(inp.at(i) == ';'){
-                    tempConn += inp.at(i);
-                    fillThis.push_back(new Connector(tempConn, comp));
-                }else{
-                    cout << "Failed" << endl;
+        while(i < inp.size()){
+            if(i < inp.size() && inp.at(i) == ' '){// to skip spaces
+                i++;
+            }
+            if(inp.at(i) == '&' || inp.at(i) == '|' || inp.at(i) == ';'){// this is to add connectors
+                if(i == 0 || start == true){
                     return true;
                 }
-            }else{
-                cout << "Finally" << endl;
+                if(comp->getSize() == 0 && i > inp.size() - 3){
+                    return true;
+                }
+                if(inp.at(i + 1) == inp.at(i)){
+                    string tempCon;
+                    tempCon += inp.at(i);
+                    tempCon += inp.at(i + 1);
+                    // cout << "Made a connector" << endl;
+                    // cout << tempCon << "<- this" << endl;
+                    fillThis.push_back(new Connector(tempCon, comp));
+                    i += 2;
+                }
+                if(inp.at(i) == ';'){
+                    fillThis.push_back(new Connector(";" , comp));
+                    i++;
+                }
+                start = false;
             }
-        }comp->setVec(fillThis);
+            if(inp.at(i) != '&' && inp.at(i) != '|' && inp.at(i) != ';' && inp.at(i) != ' '){// parsing commandLeaf
+                start = false;
+                string tempAct;
+                while( i < inp.size() && inp.at(i) != ' '){// creating activity
+                    tempAct += inp.at(i);
+                    i++; 
+                }
+                if(tempAct != "exit"){// creating exit if activity was not exit
+                    string tempArg;
+                    vector<string> tempStrVec;
+                    while(i < inp.size() && inp.at(i) != '\0' && inp.at(i) != '&' && inp.at(i) != '|' && inp.at(i) != ';'){// parsing the arguments
+                        if(inp.at(i) == ' '){
+                            i++;
+                        }tempArg = "";
+                        while( i < inp.size() && inp.at(i) != ' ' && inp.at(i) != '\0' && inp.at(i) != '&' && inp.at(i) != '|' && inp.at(i) != ';'){// goes through each word. Ends if there is a space or NULL
+                            tempArg += inp.at(i);
+                            i++;
+                        }//cout << tempArg << endl;
+                        if(tempArg != ""){// if tempArg is empty this means there is nothing to push
+                            tempStrVec.push_back(tempArg);
+                        }
+                    }
+                    if(tempStrVec.size() != 0){// i fthe vector is empty there is nothing to push
+                    // cout << "Made a Command" << endl;
+                        fillThis.push_back(new commandLeaf(tempAct, tempStrVec));
+                    }
+                }else{// creating exit
+                    fillThis.push_back(new ExitObj());
+                }
+                
+            }
+            
+            
+        }
+        comp->setVec(fillThis);
         return false;
     }
 

@@ -10,9 +10,9 @@
 #include "input.h"
 using namespace std;
 
-class Exit : public Input{
+class ExitObj : public Input{
     public:
-    Exit(){ }
+    ExitObj(){ }
     int execute(int i){
         // cout << "Hello4" << endl;
         exit(0);
@@ -20,7 +20,9 @@ class Exit : public Input{
     bool getPass(){
         return false;
     }
-    
+    bool setPass(bool b, int i){
+            return true;
+    }
 };
 
 
