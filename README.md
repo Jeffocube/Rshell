@@ -10,16 +10,21 @@ The program we are creating will be a shell called RShell. It will have some of 
 ![UML](https://github.com/cs100/assignment-cs100_jeffery_and_kevin/blob/master/images/UML%20Shell.jpeg?raw=true)
 # Classes:
 Our classes will be derived from an interface that we will call "Input"
-Input
+
+Input:
+
     will act as the interface similar to the lab examples. Contains Commands and the Execution of those commands. Below are classes that derive from the Input class.
 
-Commands
+Commands:
+
     We will have two command classes. The first is a composite called commandComp, this will encompass all other commands/inputs and will contain a vector that contains all these inputs. The second is commandLeaf which will contain the actual commands themself. When execute is called on commandComp, it will call execute on the commandLeaf and commandLeaf will execute a command such as "echo hello world". commandLeaf contains a string to the command called "activity" and a vector of arguments.
 
-Connector
+Connector:
+
     The connector will be a special object that will influence the iterator used to run through the vector of the commandLeaf. This is done by taking in the commandComp object of which is the parent to the connector and the iterator pointer and then changing the iterator depending on how the last command went.
 
-Exit
+Exit:
+
     The exit object will run the exit call to leave the program when executed.
 # Prototypes/Research:
 
