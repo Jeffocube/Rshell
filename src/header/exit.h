@@ -18,7 +18,7 @@ class ExitObj : public Input{
         exit(0);
     }
     bool getPass(){
-        return false;
+        return true;
     }
     bool setPass(bool b, int i){
             return true;
