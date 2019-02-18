@@ -17,6 +17,7 @@ using namespace std;
         bool start = true;
         vector<Input*> fillThis;
         while(i < inp.size()){
+            LABELS:
             if(inp.at(i) == ';'){
                 goto LABELSEMI;
             }
@@ -38,8 +39,6 @@ using namespace std;
                     string tempCon;
                     tempCon += inp.at(i);
                     tempCon += inp.at(i + 1);
-                    // cout << "Made a connector" << endl;
-                    // cout << tempCon << "<- this" << endl;
                     fillThis.push_back(new Connector(tempCon, comp));
                     i += 2;
                 }
@@ -54,9 +53,26 @@ using namespace std;
                 string tempAct;
                 while( i < inp.size() && inp.at(i) != ' '){// creating activity
                     tempAct += inp.at(i);
+                        if(inp.at(i) == '#'){
+                            goto LABEL2;
+                        }
+                        else if(inp.at(i) == ';'){
+                            vector<string> empVec;
+                            fillThis.push_back(new commandLeaf(tempAct, empVec));
+                            goto LABEL2;
+                        }
                     i++; 
-                    if(inp.at(i) == '#'){
+                    if(i == inp.size()){
+                        vector<string> empVec;
+                        fillThis.push_back(new commandLeaf(tempAct, empVec));
                         goto LABEL2;
+                    }
+                    else if(i < (inp.size() - 2) && (inp.at(i + 2) == '|' || inp.at(i + 2) == '&')){
+                        vector<string> empVec;
+                        tempAct += inp.at(i);
+                        i++;
+                        fillThis.push_back(new commandLeaf(tempAct, empVec));
+                        goto LABELS;
                     }
                 }
                 if(tempAct != "exit"){// creating exit if activity was not exit
@@ -84,10 +100,7 @@ using namespace std;
                 }else{// creating exit
                     fillThis.push_back(new ExitObj());
                 }
-                
             }
-            
-            
         }LABEL2:
         comp->setVec(fillThis);
         return false;
