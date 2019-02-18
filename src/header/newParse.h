@@ -64,7 +64,11 @@ using namespace std;
                     i++; 
                     if(i == inp.size()){
                         vector<string> empVec;
-                        fillThis.push_back(new commandLeaf(tempAct, empVec));
+                        if(tempAct == "exit"){
+                            fillThis.push_back(new ExitObj());
+                        }else{
+                            fillThis.push_back(new commandLeaf(tempAct, empVec));
+                        }
                         goto LABEL2;
                     }
                     else if(i < (inp.size() - 2) && (inp.at(i + 2) == '|' || inp.at(i + 2) == '&' || inp.at(i + 1) == ';')){
@@ -74,7 +78,11 @@ using namespace std;
                         if(tempAct.at(tempAct.size() - 1) == ' '){
                             tempAct.pop_back();
                         }
-                        fillThis.push_back(new commandLeaf(tempAct, empVec));
+                        if(tempAct == "exit"){
+                          fillThis.push_back(new ExitObj());
+                        }else{
+                          fillThis.push_back(new commandLeaf(tempAct, empVec));
+                        }
                         goto LABELS;
                     }
                 }
