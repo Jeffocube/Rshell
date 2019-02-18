@@ -40,6 +40,9 @@ class commandComp : public Input{
             comm.at(i)->setPass(b, i);
             return true;
         }
+        string getActivity(int i){
+            return comm.at(i)->getActivity(i);
+        }
 };
 class commandLeaf : public Input{
     private:
@@ -85,6 +88,9 @@ class commandLeaf : public Input{
         		}
         	}
         	return i;
+        }
+        string getActivity(int i){
+            return activity;
         }
 };
 #endif

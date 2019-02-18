@@ -23,6 +23,9 @@ class ExitObj : public Input{
     bool setPass(bool b, int i){
             return true;
     }
+    string getActivity(int i){
+        return "exit";
+    }
 };
 
 

@@ -44,6 +44,9 @@ class Connector : public Input{
             pass = b;
             return true;
         }
+        string getActivity(int i){
+            return activity;
+        }
 
 };
 
