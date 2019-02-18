@@ -1,3 +1,4 @@
+#include <iostream>
 #include <vector>
 #include <unistd.h>
 #include <iostream>
@@ -5,17 +6,22 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdlib.h>
-#include "command.h"
-#include "helpers.h"
-#include "exit.h"
-#include "input.h"
-
+#include "header/input.h"
+#include "header/command.h"
+#include "header/connector.h"
+#include "header/exit.h"
+#include "header/newParse.h"
 using namespace std;
 int main(){
-    exit* ex = new exit();
-    vector<Input*> tempVec;
-    tempVec.push_back(ex);
-    commandComp command = commandComp(tempVec);
-    
-    return 0;
+	while(1){
+		string input;
+		int i = 1;
+		commandComp* command = new commandComp();
+		do{
+			cout << "$ ";
+			getline(cin, input);
+		}while(newParse(input, command));
+		command->execute(i);
+	}
+	exit(0);
 }
