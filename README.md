@@ -121,16 +121,11 @@ Steps:
 
 Develop the basic command shell that takes commands and connectors
 
-	classes&stuff :
-	Input - J
-	Command	- K
-	Execute*? - J
-	main.cpp - K
-
-	unit tests : 
-	forking properly - K
-	commands are running properly - K
-	ensure the program works as a whole - J
+#10
+#11
+#12
+#13
+#14
 Assignments subject to change	
 
 
