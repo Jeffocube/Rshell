@@ -67,10 +67,13 @@ using namespace std;
                         fillThis.push_back(new commandLeaf(tempAct, empVec));
                         goto LABEL2;
                     }
-                    else if(i < (inp.size() - 2) && (inp.at(i + 2) == '|' || inp.at(i + 2) == '&')){
+                    else if(i < (inp.size() - 2) && (inp.at(i + 2) == '|' || inp.at(i + 2) == '&' || inp.at(i + 1) == ';')){
                         vector<string> empVec;
                         tempAct += inp.at(i);
                         i++;
+                        if(tempAct.at(tempAct.size() - 1) == ' '){
+                            tempAct.pop_back();
+                        }
                         fillThis.push_back(new commandLeaf(tempAct, empVec));
                         goto LABELS;
                     }
