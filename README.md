@@ -119,13 +119,17 @@ Note: The execvp() function takes in a char* const* variable
 
 Steps:
 
-Develop the basic command shell that takes commands and connectors
-
+Check KanBan for updated Issues
 #10
+
 #11
+
 #12
+
 #13
+
 #14
+
 Assignments subject to change	
 
 
