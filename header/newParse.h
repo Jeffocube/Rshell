@@ -17,10 +17,17 @@ using namespace std;
         bool start = true;
         vector<Input*> fillThis;
         while(i < inp.size()){
+            if(inp.at(i) == ';'){
+                goto LABELSEMI;
+            }
             if(i < inp.size() && inp.at(i) == ' '){// to skip spaces
                 i++;
             }
+            if(inp.at(i) == '#'){
+                goto LABEL2;
+            }
             if(inp.at(i) == '&' || inp.at(i) == '|' || inp.at(i) == ';'){// this is to add connectors
+                LABELSEMI:
                 if(i == 0 || start == true){
                     return true;
                 }
@@ -42,12 +49,15 @@ using namespace std;
                 }
                 start = false;
             }
-            if(inp.at(i) != '&' && inp.at(i) != '|' && inp.at(i) != ';' && inp.at(i) != ' '){// parsing commandLeaf
+            if(inp.at(i) != '&' && inp.at(i) != '|' && inp.at(i) != ';' && inp.at(i) != ' ' && inp.at(i) != '#'){// parsing commandLeaf
                 start = false;
                 string tempAct;
                 while( i < inp.size() && inp.at(i) != ' '){// creating activity
                     tempAct += inp.at(i);
                     i++; 
+                    if(inp.at(i) == '#'){
+                        goto LABEL2;
+                    }
                 }
                 if(tempAct != "exit"){// creating exit if activity was not exit
                     string tempArg;
@@ -56,14 +66,17 @@ using namespace std;
                         if(inp.at(i) == ' '){
                             i++;
                         }tempArg = "";
-                        while( i < inp.size() && inp.at(i) != ' ' && inp.at(i) != '\0' && inp.at(i) != '&' && inp.at(i) != '|' && inp.at(i) != ';'){// goes through each word. Ends if there is a space or NULL
+                        if(inp.at(i) == '#'){
+                            goto LABELNAME;
+                        }
+                        while( i < inp.size() && inp.at(i) != ' ' && inp.at(i) != '\0' && inp.at(i) != '&' && inp.at(i) != '|' && inp.at(i) != ';' && inp.at(i) != '#'){// goes through each word. Ends if there is a space or NULL
                             tempArg += inp.at(i);
                             i++;
                         }//cout << tempArg << endl;
                         if(tempArg != ""){// if tempArg is empty this means there is nothing to push
                             tempStrVec.push_back(tempArg);
                         }
-                    }
+                    }LABELNAME:
                     if(tempStrVec.size() != 0){// i fthe vector is empty there is nothing to push
                     // cout << "Made a Command" << endl;
                         fillThis.push_back(new commandLeaf(tempAct, tempStrVec));
@@ -75,7 +88,7 @@ using namespace std;
             }
             
             
-        }
+        }LABEL2:
         comp->setVec(fillThis);
         return false;
     }
