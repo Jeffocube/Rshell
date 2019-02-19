@@ -51,3 +51,8 @@ TEST(parse_test, SINGLE_DIR_TEST) {
     newParse("dir; echo hello", comm);
     EXPECT_EQ(comm->getActivity(0), "dir");
 }
+TEST(parse_test, QUOTES_TEST) {
+    commandComp* comm = new commandComp();
+    newParse("echo \"hello\" && echo hi", comm);
+    EXPECT_EQ(comm->getActivity(2), "echo");
+}
