@@ -1,0 +1,4 @@
+
+ls || exit || exit && exit
+echo hi exit
+exit

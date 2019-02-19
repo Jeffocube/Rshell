@@ -1,1 +1,14 @@
+echo hel#lo world
+echo ^should out hel
+#echo hi
+echo ^should out nothing
+echo #hello
+echo ^should out nothing
+echo hello && #echo hello world
+echo ^should out hello
+##echo hello world
+echo ^should out nothing
+ech#o hello world
+echo ^should out nothing
+echo exiting now
 exit

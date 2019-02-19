@@ -1,0 +1,12 @@
+ls
+echo ^should have done ls
+dir
+echo ^should show the directory
+echo hello world this is a test case that is supposed to out a sentence without any use of connectors
+echo ^should out a sentence
+git status
+echo ^should should git status
+which ls
+echo ^should should which ls
+echo exiting now
+exit

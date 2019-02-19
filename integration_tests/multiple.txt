@@ -1,0 +1,18 @@
+echo hello && echo world
+echo ^should out hello world
+echo hello world || echo hello world
+echo ^should out hello world hello world
+echo hello; echo world
+echo ^should out hello world
+echo hello || echo my name is && echo blank
+echo ^should out hello blank
+echo hello && echo my name is || echo blank
+echo ^should out hello my name is
+echo hello; echo my name is; echo blank
+echo ^should out hello my name is blank
+echo hello && echo my name is; echo blank
+echo ^echo should out hello my name is blank
+echo hello; echo my name is || echo blank
+echo ^should out hello my name is
+echo exiting now
+exit

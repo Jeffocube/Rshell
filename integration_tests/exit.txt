@@ -1,0 +1,3 @@
+echo exit
+echo hello world || exit && echo hi
+echo hello world && exit
