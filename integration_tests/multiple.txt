@@ -13,6 +13,6 @@ echo ^should out hello my name is blank
 echo hello && echo my name is; echo blank
 echo ^echo should out hello my name is blank
 echo hello; echo my name is || echo blank
-echo ^should out hello my name is
-echo exiting now
+echo ^echo should out hello my name is
+echo exiting test now
 exit
