@@ -14,5 +14,9 @@ echo hello && echo my name is; echo blank
 echo ^echo should out hello my name is blank
 echo hello; echo my name is || echo blank
 echo ^echo should out hello my name is
+echo "hello && echo my name is" || echo blank
+echo ^echo should out ""hello && echo my name is""
+echo hello && echo "my name is || echo blank"
+echo ^echo should out hello "echo my name is || echo blank"
 echo exiting test now
 exit
