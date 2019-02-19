@@ -42,3 +42,5 @@ ptest
 a.out
 rshell
 test
+Makefile
+cmake_install.cmake
