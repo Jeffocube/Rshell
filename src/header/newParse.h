@@ -40,6 +40,7 @@ using namespace std;
                     tempCon += inp.at(i);
                     tempCon += inp.at(i + 1);
                     fillThis.push_back(new Connector(tempCon, comp));
+                    //cout << tempCon <<  "<- this is a connector" << endl;
                     i += 2;
                 }
                 if(inp.at(i) == ';'){
@@ -89,7 +90,18 @@ using namespace std;
                 if(tempAct != "exit"){// creating exit if activity was not exit
                     string tempArg;
                     vector<string> tempStrVec;
+                    if(inp.at(i + 1) == '"'){
+                        i += 2;
+                        while(i < inp.size() && inp.at(i) != '"'){
+                              tempArg += inp.at(i);
+                              i++;
+                        }tempStrVec.push_back(tempArg);
+                        i++;
+                        //cout << "Made a quote" << endl;
+                        goto LABELNAME;
+                    }
                     while(i < inp.size() && inp.at(i) != '\0' && inp.at(i) != '&' && inp.at(i) != '|' && inp.at(i) != ';'){// parsing the arguments
+                    //cout << "Through here" << endl;
                         if(inp.at(i) == ' '){
                             i++;
                         }tempArg = "";
@@ -104,8 +116,7 @@ using namespace std;
                             tempStrVec.push_back(tempArg);
                         }
                     }LABELNAME:
-                    if(tempStrVec.size() != 0){// i fthe vector is empty there is nothing to push
-                    // cout << "Made a Command" << endl;
+                    if(tempStrVec.size() != 0){// if the vector is empty there is nothing to push
                         fillThis.push_back(new commandLeaf(tempAct, tempStrVec));
                     }
                 }else{// creating exit

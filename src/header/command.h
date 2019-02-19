@@ -23,7 +23,6 @@ class commandComp : public Input{
         int execute(int i){
             int numChildren = comm.size();
             for(int k = 0; k < numChildren; k++){
-                // cout << "Executed" << endl;
                 k = comm.at(k)->execute(k);
             }
         }
