@@ -6,7 +6,7 @@ Jeffery Lai 862043827
 # Introduction:
 The program we are creating will be a shell called RShell. It will have some of the capabilities of the current shell we use, bash. This includes printing a command prompt, taking in user input, and translating those commands into services that the user requests. For this assignment, we will use the Composite Pattern as our framework for the program. This is important as the user will be entering different inputs and the having a composite pattern will allow the user to treat all the objects in the program in the same manner.
 # Diagram:
-//insert image url
+
 ![UML](https://github.com/cs100/assignment-cs100_jeffery_and_kevin/blob/master/images/UML%20Shell.jpeg?raw=true)
 # Classes:
 Our classes will be derived from an interface that we will call "Input"
@@ -120,15 +120,16 @@ Note: The execvp() function takes in a char* const* variable
 Steps:
 
 Check KanBan for updated Issues
-#10
 
-#11
+Start work on test functions #10
 
-#12
+Meeting to design and discuss test #11
 
-#13
+Discuss the types of patterns to be used for parentheses and such #12
 
-#14
+Experiment with "test" on bash #13
+
+Clean up some code if possible #14
 
 Assignments subject to change	
 
