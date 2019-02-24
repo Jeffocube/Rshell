@@ -78,7 +78,8 @@ class commandLeaf : public Input{
         	childPid = fork();
         	if(childPid == 0){
                 if(execvp(activity.c_str(), argIn - 1) != 0){
-                    exit(1);
+                    perror("Does not work");
+                    _exit(1);
                 }
         	}else{
         		waitpid(childPid, &status, 0);
