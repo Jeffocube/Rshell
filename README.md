@@ -114,6 +114,8 @@ Note: when entering 2 noncommand arguments when running ./a.out, more process in
 
 
 Note: The execvp() function takes in a char* const* variable
+Note: When using parentheses, if any of the commands run, the total command will be true. 
+Note: We should use a commandComp for the parentheses and add a bool into the commandComp which will allow the commandComp to act like a child.
 
 # Developing and Testing Roadmap:
 
