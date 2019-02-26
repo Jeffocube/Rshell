@@ -21,6 +21,18 @@ using namespace std;
             if(inp.at(i) == ';'){
                 goto LABELSEMI;
             }
+            if(inp.at(i) == '('){// unfinished function. Test this later
+                string parentheString;
+                int k = i;
+                while(k < inp.size() && inp.at(k) != ')'){
+                    k++;
+                }
+                commandComp* nComp = new commandComp;
+                newParse(inp.substr(i + 1, k), nComp);
+                i = k + 1;
+                fillThis.push_back(nComp);
+                goto LABELS;
+            }
             if(i < inp.size() && inp.at(i) == ' '){// to skip spaces
                 i++;
             }
