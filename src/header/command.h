@@ -21,8 +21,10 @@ class commandComp : public Input{
             comm = vec;
         }
         int execute(int i){
+            //cout << comm.size() << " <- this is the size" << endl;
             int numChildren = comm.size();
             for(int k = 0; k < numChildren; k++){
+            //cout << "running once" << endl;
                 k = comm.at(k)->execute(k);
             }
         }
@@ -62,7 +64,7 @@ class commandLeaf : public Input{
             return true;
         }
         int execute(int i){
-            // cout << "executed" << endl;
+            cout << "executed" << endl;
             // cout << activity << "<- did this" << endl;
             int k = args.size();
             pid_t childPid;
@@ -77,12 +79,16 @@ class commandLeaf : public Input{
             argIn[k] = NULL;
         	childPid = fork();
         	if(childPid == 0){
-                if(execvp(activity.c_str(), argIn - 1) != 0){
+                int sh = execvp(activity.c_str(), argIn - 1);
+                if(sh == -1){
                     perror("Does not work");
-                    _exit(1);
+                    exit(EXIT_FAILURE);
                 }
+                    exit(0);
+                
+                
         	}else{
-        		waitpid(childPid, &status, 0);
+        		wait(&status);
         		if(status == 0){
         		    pass = true;
         		}

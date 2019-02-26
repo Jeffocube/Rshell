@@ -22,24 +22,27 @@ using namespace std;
                 goto LABELSEMI;
             }
             if(inp.at(i) == '('){// unfinished function. Test this later
-                string parentheString;
                 int k = i;
                 while(k < inp.size() && inp.at(k) != ')'){
                     k++;
                 }
+                k -= i + 1;
                 commandComp* nComp = new commandComp;
+                //cout << inp.substr(i + 1, k) << " This is what was created" << endl;
                 newParse(inp.substr(i + 1, k), nComp);
-                i = k + 1;
+                i += k;
                 fillThis.push_back(nComp);
-                goto LABELS;
+            }
+            if(i < inp.size() && inp.at(i) == ')'){
+                i++;
             }
             if(i < inp.size() && inp.at(i) == ' '){// to skip spaces
                 i++;
             }
-            if(inp.at(i) == '#'){
+            if(i < inp.size() && inp.at(i) == '#'){
                 goto LABEL2;
             }
-            if(inp.at(i) == '&' || inp.at(i) == '|' || inp.at(i) == ';'){// this is to add connectors
+            if(i < inp.size() && (inp.at(i) == '&' || inp.at(i) == '|' || inp.at(i) == ';')){// this is to add connectors
                 LABELSEMI:
                 if(i == 0 || start == true){
                     return true;
@@ -61,7 +64,7 @@ using namespace std;
                 }
                 start = false;
             }
-            if(inp.at(i) != '&' && inp.at(i) != '|' && inp.at(i) != ';' && inp.at(i) != ' ' && inp.at(i) != '#'){// parsing commandLeaf
+            if(i < inp.size() && (inp.at(i) != '&' && inp.at(i) != '|' && inp.at(i) != ';' && inp.at(i) != ' ' && inp.at(i) != '#' && inp.at(i) != '(')){// parsing commandLeaf
                 start = false;
                 string tempAct;
                 while( i < inp.size() && inp.at(i) != ' '){// creating activity
@@ -98,7 +101,7 @@ using namespace std;
                         }
                         goto LABELS;
                     }
-                }
+                }//cout << tempAct << " <- this is tempAct" << endl;
                 if(tempAct != "exit"){// creating exit if activity was not exit
                     string tempArg;
                     vector<string> tempStrVec;
@@ -117,7 +120,7 @@ using namespace std;
                         if(inp.at(i) == ' '){
                             i++;
                         }tempArg = "";
-                        if(inp.at(i) == '#'){
+                        if(i < inp.size() && inp.at(i) == '#'){
                             goto LABELNAME;
                         }
                         while( i < inp.size() && inp.at(i) != ' ' && inp.at(i) != '\0' && inp.at(i) != '&' && inp.at(i) != '|' && inp.at(i) != ';' && inp.at(i) != '#'){// goes through each word. Ends if there is a space or NULL
@@ -125,10 +128,12 @@ using namespace std;
                             i++;
                         }//cout << tempArg << endl;
                         if(tempArg != ""){// if tempArg is empty this means there is nothing to push
+                            //cout << tempArg << " <- this is tempArg" << endl;
                             tempStrVec.push_back(tempArg);
                         }
                     }LABELNAME:
                     if(tempStrVec.size() != 0){// if the vector is empty there is nothing to push
+                        //cout << "commandLeaf created" << endl;
                         fillThis.push_back(new commandLeaf(tempAct, tempStrVec));
                     }
                 }else{// creating exit
