@@ -117,6 +117,39 @@ Note: The execvp() function takes in a char* const* variable
 Note: When using parentheses, if any of the commands run, the total command will be true. 
 Note: We should use a commandComp for the parentheses and add a bool into the commandComp which will allow the commandComp to act like a child.
 
+Prototyping stat function:
+
+After making a very simple program that uses the stat function to take a look at a test file (txt with 3 random lines), we see that we need to declare a stat variable, use the stat(const char*, stat*) function to assign a file to the stat object, and then we can simply print information such as statvariabe.st_size (the size in bits) or statvariable.st_atime (last time the file was accessed).
+Here is the simple block of code:
+```
+int main(int argc, char* argv[])
+{
+    struct stat test;
+    
+    stat("texttest.txt", &test);
+    
+    cout << "st_mode = %o\n" << test.st_atime << endl;
+    return 0;
+}
+```
+
+We can also use a switch statement in order to use the S_IF macros in a block of code such as 
+```
+switch (sb.st_mode & S_IFMT) {
+    case S_IFBLK:  printf("block device\n");            break;
+    case S_IFCHR:  printf("character device\n");        break;
+    case S_IFDIR:  printf("directory\n");               break;
+    case S_IFIFO:  printf("FIFO/pipe\n");               break;
+    case S_IFLNK:  printf("symlink\n");                 break;
+    case S_IFREG:  printf("regular file\n");            break;
+    case S_IFSOCK: printf("socket\n");                  break;
+    default:       printf("unknown?\n");                break;
+    }
+```
+Which is similar to a big if else if block. Using this, we can easily select a file and print its file type.
+
+For our program, we can adapt usage of the switch statement and S_IFDIR and S_IFREG to treat directories and regular files accordingly.
+
 # Developing and Testing Roadmap:
 
 Steps:
