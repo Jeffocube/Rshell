@@ -122,7 +122,7 @@ Prototyping stat function:
 After making a very simple program that uses the stat function to take a look at a test file (txt with 3 random lines), we see that we need to declare a stat variable, use the stat(const char*, stat*) function to assign a file to the stat object, and then we can simply print information such as statvariabe.st_size (the size in bits) or statvariable.st_atime (last time the file was accessed).
 Here is the simple block of code:
 ```
-int main(int argc, char* argv[])
+int main()
 {
     struct stat test;
     
@@ -150,6 +150,15 @@ switch (sb.st_mode & S_IFMT) {
 Which is similar to a big if else if block. Using this, we can easily select a file and print its file type.
 
 For our program, we can adapt usage of the switch statement and S_IFDIR and S_IFREG to treat directories and regular files accordingly.
+
+
+In order to dynamically select the target file, we use parameters when running the test program 
+```
+int main(int argc, char *argv[])
+```
+and now we can run ./a.out <pathname> to select the file. 
+This is a possible format we can use to implement our use of the stat functions.
+
 
 # Developing and Testing Roadmap:
 
