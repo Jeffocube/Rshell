@@ -128,7 +128,8 @@ int main(int argc, char* argv[])
     
     stat("texttest.txt", &test);
     
-    cout << "st_mode = %o\n" << test.st_atime << endl;
+    cout << "st_size = %o\n" << test.st_size << endl;
+    cout << "st_atime = %o\n" << test.st_atime << endl;
     return 0;
 }
 ```
