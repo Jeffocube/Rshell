@@ -117,6 +117,125 @@ Note: The execvp() function takes in a char* const* variable
 Note: When using parentheses, if any of the commands run, the total command will be true. 
 Note: We should use a commandComp for the parentheses and add a bool into the commandComp which will allow the commandComp to act like a child.
 
+Prototyping stat function:
+
+After making a very simple program that uses the stat function to take a look at a test file (txt with 3 random lines), we see that we need to declare a stat variable, use the stat(const char*, stat*) function to assign a file to the stat object, and then we can simply print information such as statvariabe.st_size (the size in bits) or statvariable.st_atime (last time the file was accessed).
+Here is the simple block of code:
+```
+int main()
+{
+    struct stat test;
+    
+    stat("texttest.txt", &test);
+    
+    cout << "st_size = %o\n" << test.st_size << endl;
+    cout << "st_atime = %o\n" << test.st_atime << endl;
+    return 0;
+}
+```
+
+We can also use a switch statement in order to use the S_IF macros in a block of code such as 
+```
+switch (sb.st_mode & S_IFMT) {
+    case S_IFBLK:  printf("block device\n");            break;
+    case S_IFCHR:  printf("character device\n");        break;
+    case S_IFDIR:  printf("directory\n");               break;
+    case S_IFIFO:  printf("FIFO/pipe\n");               break;
+    case S_IFLNK:  printf("symlink\n");                 break;
+    case S_IFREG:  printf("regular file\n");            break;
+    case S_IFSOCK: printf("socket\n");                  break;
+    default:       printf("unknown?\n");                break;
+    }
+```
+Which is similar to a big if else if block. Using this, we can easily select a file and print its file type.
+
+For our program, we can adapt usage of the switch statement and S_IFDIR and S_IFREG to treat directories and regular files accordingly.
+
+
+In order to dynamically select the target file, we use parameters when running the test program 
+```
+int main(int argc, char *argv[])
+```
+and now we can run ./a.out <pathname> to select the file. 
+This is a possible format we can use to implement our use of the stat functions.
+
+In an example given in the specs:
+```
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int
+main(int argc, char *argv[])
+{
+    struct stat sb;
+
+   if (argc != 2) {
+        fprintf(stderr, "Usage: %s <pathname>\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
+
+   if (stat(argv[1], &sb) == -1) {
+        perror("stat");
+        exit(EXIT_FAILURE);
+    }
+
+   printf("File type:                ");
+
+   switch (sb.st_mode & S_IFMT) {
+    case S_IFBLK:  printf("block device\n");            break;
+    case S_IFCHR:  printf("character device\n");        break;
+    case S_IFDIR:  printf("directory\n");               break;
+    case S_IFIFO:  printf("FIFO/pipe\n");               break;
+    case S_IFLNK:  printf("symlink\n");                 break;
+    case S_IFREG:  printf("regular file\n");            break;
+    case S_IFSOCK: printf("socket\n");                  break;
+    default:       printf("unknown?\n");                break;
+    }
+
+   printf("I-node number:            %ld\n", (long) sb.st_ino);
+
+   printf("Mode:                     %lo (octal)\n",
+            (unsigned long) sb.st_mode);
+
+   printf("Link count:               %ld\n", (long) sb.st_nlink);
+    printf("Ownership:                UID=%ld   GID=%ld\n",
+            (long) sb.st_uid, (long) sb.st_gid);
+
+   printf("Preferred I/O block size: %ld bytes\n",
+            (long) sb.st_blksize);
+    printf("File size:                %lld bytes\n",
+            (long long) sb.st_size);
+    printf("Blocks allocated:         %lld\n",
+            (long long) sb.st_blocks);
+
+   printf("Last status change:       %s", ctime(&sb.st_ctime));
+    printf("Last file access:         %s", ctime(&sb.st_atime));
+    printf("Last file modification:   %s", ctime(&sb.st_mtime));
+
+   exit(EXIT_SUCCESS);
+}
+```
+We can see by the output 
+```
+$ ./a.out texttest.txt
+File type:                regular file
+I-node number:            846
+Mode:                     100644 (octal)
+Link count:               1
+Ownership:                UID=1000   GID=1000
+Preferred I/O block size: 4096 bytes
+File size:                32 bytes
+Blocks allocated:         8
+Last status change:       Wed Feb 27 18:52:51 2019
+Last file access:         Wed Feb 27 18:35:57 2019
+Last file modification:   Wed Feb 27 18:52:51 2019
+```
+how extensive we can make a file status program, adding as few or many items of information to check.
+
+
 # Developing and Testing Roadmap:
 
 Steps:
