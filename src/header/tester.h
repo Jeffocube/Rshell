@@ -17,8 +17,12 @@ class Test : public Input{
         string point;// directory or file we are looking up status for
         bool pass = false;
     public:
+        Test(string activity, string point){
+            this->activity = activity;
+            this->point = this->point;
+        }
         int execute(int i){
-            
+            return i;
         }
         bool getPass(){
             return pass;

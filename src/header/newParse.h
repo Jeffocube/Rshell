@@ -11,6 +11,7 @@
 #include "connector.h"
 #include "command.h"
 #include "exit.h"
+#include "tester.h"
 using namespace std;
     bool newParse(string inp, commandComp* comp){
         int i = 0;
@@ -21,18 +22,25 @@ using namespace std;
             if(inp.at(i) == ';'){
                 goto LABELSEMI;
             }
-            if(inp.at(i) == '('){// unfinished function. Test this later
+            if(inp.at(i) == '['){
+                int k = i;
+                while(k < inp.size() && inp.at(k) != ']'){
+                    k++;
+                }
+                k -= i + 1;
+                fillThis.push_back(makeTest_1(&i, inp.substr(i + 1, k)));
+                i += 2;
+            }
+            if(inp.at(i) == '('){
                 int k = i;
                 while(k < inp.size() && inp.at(k) != ')'){
                     k++;
                 }
                 k -= i + 1;
                 commandComp* nComp = new commandComp;
-                //cout << inp.substr(i + 1, k) << " This is what was created" << endl;
                 newParse(inp.substr(i + 1, k), nComp);
                 i += k + 2;
                 fillThis.push_back(nComp);
-                //cout << inp.at(i) << inp.at(i + 1)<< endl;
             }
             if(i < inp.size() && inp.at(i) == ')'){
                 i++;
@@ -46,10 +54,8 @@ using namespace std;
             if(i < inp.size() && (inp.at(i) == '&' || inp.at(i) == '|' || inp.at(i) == ';')){// this is to add connectors
                 LABELSEMI:
                 if(comp->getSize() == 0 && i > inp.size() - 3){
-                    //cout << "here" << endl;
                     return true;
                 }
-                //cout << "here" << endl;
                 if(inp.at(i + 1) == inp.at(i)){
                     string tempCon;
                     tempCon += inp.at(i);
@@ -143,5 +149,22 @@ using namespace std;
         comp->setVec(fillThis);
         return false;
     }
-
+Test* makeTest_1(int* i, string str){
+    int k = 0;
+    string tempTestAct = "";
+    string tempTestArg = "";
+    while(k < str.size() && str.at(k) != ' '){
+        tempTestAct += str.at(k);
+    }
+    if(tempTestAct != "-e" || tempTestAct != "-d" || tempTestAct != "-f"){
+        tempTestArg = tempTestAct;
+        tempTestAct = "-e";
+    }else{
+        k++
+        while(k < str.size()){
+            tempTestArg += str.at(k);
+        }
+    }
+    return new Test(tempTestAct, tempTestArg);
+}
 #endif
