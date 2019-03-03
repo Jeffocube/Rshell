@@ -14,6 +14,7 @@ using namespace std;
 class commandComp : public Input{
     private:
         vector<Input*> comm;
+        bool pass = false;
     public:
         commandComp(){
         }
@@ -25,6 +26,8 @@ class commandComp : public Input{
             int numChildren = comm.size();
             for(int k = 0; k < numChildren; k++){
                 k = comm.at(k)->execute(k);
+                if(comm.at(k)->getPass() == true)
+                    pass = true;
             }
             return i;
         }
@@ -32,14 +35,17 @@ class commandComp : public Input{
             return comm.at(i)->getPass();
         }
         bool getPass(){
-            return true;
+            return pass;
         }
         int getSize(){
             return comm.size();
         }
-        bool setPass(bool b, int i){
+        bool setPPass(bool b, int i){
             comm.at(i)->setPass(b, i);
             return true;
+        }
+        bool setPass(bool b, int i){
+            pass = b;
         }
         string getActivity(int i){
             return comm.at(i)->getActivity(i);

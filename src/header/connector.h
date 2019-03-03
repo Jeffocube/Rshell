@@ -25,10 +25,10 @@ class Connector : public Input{
             // cout << "Connector executed" << endl;
             // cout << "hello again" << endl;
             if(parent->getInComm(i - 1) == false && activity == "&&"){
-                parent->setPass(true, i + 1);
+                parent->setPPass(true, i + 1);
                 return i + 1;
             }else if(parent->getInComm(i - 1) == true && activity == "||"){
-                parent->setPass(true, i + 1);
+                parent->setPPass(true, i + 1);
                 return i + 1;
             }else if(parent->getInComm(i - 1) == true && activity == ";"){
                 // cout << "SEMICOLON" << endl;
