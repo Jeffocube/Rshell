@@ -17,7 +17,7 @@ class Test : public Input{
         string point;// directory or file we are looking up status for
         bool pass = false;
     public:
-        int execute(int ){
+        int execute(int i){
             
         }
         bool getPass(){
