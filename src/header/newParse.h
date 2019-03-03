@@ -30,8 +30,9 @@ using namespace std;
                 commandComp* nComp = new commandComp;
                 //cout << inp.substr(i + 1, k) << " This is what was created" << endl;
                 newParse(inp.substr(i + 1, k), nComp);
-                i += k;
+                i += k + 2;
                 fillThis.push_back(nComp);
+                //cout << inp.at(i) << inp.at(i + 1)<< endl;
             }
             if(i < inp.size() && inp.at(i) == ')'){
                 i++;
@@ -44,18 +45,16 @@ using namespace std;
             }
             if(i < inp.size() && (inp.at(i) == '&' || inp.at(i) == '|' || inp.at(i) == ';')){// this is to add connectors
                 LABELSEMI:
-                if(i == 0 || start == true){
-                    return true;
-                }
                 if(comp->getSize() == 0 && i > inp.size() - 3){
+                    //cout << "here" << endl;
                     return true;
                 }
+                //cout << "here" << endl;
                 if(inp.at(i + 1) == inp.at(i)){
                     string tempCon;
                     tempCon += inp.at(i);
                     tempCon += inp.at(i + 1);
                     fillThis.push_back(new Connector(tempCon, comp));
-                    //cout << tempCon <<  "<- this is a connector" << endl;
                     i += 2;
                 }
                 if(inp.at(i) == ';'){

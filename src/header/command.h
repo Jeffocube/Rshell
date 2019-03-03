@@ -24,9 +24,9 @@ class commandComp : public Input{
             //cout << comm.size() << " <- this is the size" << endl;
             int numChildren = comm.size();
             for(int k = 0; k < numChildren; k++){
-            //cout << "running once" << endl;
                 k = comm.at(k)->execute(k);
             }
+            return i;
         }
         bool getInComm(int i){
             return comm.at(i)->getPass();
@@ -64,8 +64,8 @@ class commandLeaf : public Input{
             return true;
         }
         int execute(int i){
-            cout << "executed" << endl;
-            // cout << activity << "<- did this" << endl;
+            //cout << "executed" << endl;
+            //cout << activity << "<- did this" << endl;
             int k = args.size();
             pid_t childPid;
             int status;
@@ -81,7 +81,7 @@ class commandLeaf : public Input{
         	if(childPid == 0){
                 int sh = execvp(activity.c_str(), argIn - 1);
                 if(sh == -1){
-                    perror("Does not work");
+                    perror(activity.c_str());
                     exit(EXIT_FAILURE);
                 }
                     exit(0);

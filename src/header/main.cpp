@@ -17,7 +17,7 @@ int main(){
 	while(1){
 		string input;
 		int i = 1;
-		commandComp* command = new commandComp();
+		commandComp* command = new commandComp;
 		do{
 			cout << "$ ";
 			getline(cin, input);
