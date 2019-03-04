@@ -67,7 +67,7 @@ Test* makeTest_1(int* i, string str){
                 fillThis.push_back(nComp);
             }
             if(i < inp.size() && inp.at(i) == ')'){
-                i++;
+               // i++;
             }
             if(i < inp.size() && inp.at(i) == ' '){// to skip spaces
                 i++;
