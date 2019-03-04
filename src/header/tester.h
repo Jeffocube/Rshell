@@ -26,8 +26,8 @@ class Test : public Input{
             this->point = point;
         }
         int execute(int i){
-            cout << activity << "<-This is activity" << endl;
-            cout << point << "<-This is point"<< endl;
+            //cout << activity << "<-This is activity" << endl;
+            //cout << point << "<-This is point"<< endl;
 
 	    
             struct stat stat0;
@@ -36,7 +36,7 @@ class Test : public Input{
 
             if (stat(point.c_str(), &stat0) != 0)
             {   
-  		cout << "checke " << endl;
+  		//cout << "checke " << endl;
                 cout << "(False)" << endl;
             }
             else if (activity == "-f")

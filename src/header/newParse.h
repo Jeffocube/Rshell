@@ -49,7 +49,7 @@ Test* makeTest_1(int* i, string str){
                     k++;
                 }
                 k -= i + 1;
-                fillThis.push_back(makeTest_1(&i, inp.substr(i + 2, k - 1)));
+                fillThis.push_back(makeTest_1(&i, inp.substr(i + 2, k - 2)));
                 //cout << inp.substr(i + 1, k) << endl;
                 i += k + 2;
             }
