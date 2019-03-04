@@ -75,7 +75,7 @@ class Test : public Input{
             pass = p;
         }
         string getActivity(int i){
-            return "test";
+            return activity;
         }
     
 };

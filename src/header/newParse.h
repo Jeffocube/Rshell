@@ -26,8 +26,10 @@ Test* makeTest_1(int* i, string str){
         tempTestArg = tempTestAct;
         tempTestAct = "-e";
     }else{
-        k++;
-        while(k < str.size()){
+        while(str.at(k) == ' '){
+            k++;
+        }
+        while(k < str.size() && str.at(k) != ' '){
             tempTestArg += str.at(k);
             k++;
         }
@@ -136,9 +138,14 @@ Test* makeTest_1(int* i, string str){
                         tempStr += inp.at(i);
                         i++;
                     }
-                    i++;
+                    while(i < inp.size() && inp.at(i) == ' '){
+                          i++;
+                    }
                     tempStr += ' ';
                     if(tempStr != "-e" && tempStr != "-d" && tempStr != "-f"){
+                        while(i < inp.size() && inp.at(i) == ' '){
+                            i++;
+                        }
                         while(i < inp.size() && inp.at(i) != ' '){
                             tempStr += inp.at(i);
                             i++;
