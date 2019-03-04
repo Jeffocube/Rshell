@@ -1,0 +1,12 @@
+test -e src
+test -d src
+test -f CMakeLists.txt
+test -e dasd
+test -f dasd
+test -d dasdasdsad
+test -e src/../src
+test -d src/../src
+test -f src/../src
+
+
+exit

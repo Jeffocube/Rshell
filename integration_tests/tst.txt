@@ -1,0 +1,13 @@
+[ -e ../src ]
+[ -d ../src ]
+[ -f ../src ]
+[ -e ../src/../src ]
+[ -e ../sdasd ]
+[ -d ../dasd ]
+[ -e ../CMakeLists.txt ]
+[ -f ../CMakeLists.txt ]
+[ ../src ]
+[ ../src/../src ]
+[ ../CMakeLists.txt ]
+[ ../dasdsad ]
+exit

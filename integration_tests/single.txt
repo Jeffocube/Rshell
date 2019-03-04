@@ -1,4 +1,4 @@
-ls
+ls -j
 echo ^should have done ls
 dir
 echo ^should show the directory
