@@ -1,3 +1,5 @@
+#ifndef TESTER_H
+#define TESTER_H
 #include <unistd.h>
 #include <iostream>
 #include <string>
@@ -19,9 +21,11 @@ class Test : public Input{
     public:
         Test(string activity, string point){
             this->activity = activity;
-            this->point = this->point;
+            this->point = point;
         }
         int execute(int i){
+            cout << activity << "<-This is activity" << endl;
+            cout << point << "<-This is point"<< endl;
             return i;
         }
         bool getPass(){
@@ -35,3 +39,4 @@ class Test : public Input{
         }
     
 };
+#endif

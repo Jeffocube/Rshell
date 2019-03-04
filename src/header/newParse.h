@@ -13,6 +13,29 @@
 #include "exit.h"
 #include "tester.h"
 using namespace std;
+Test* makeTest_1(int* i, string str){
+    cout << str << endl;
+    int k = 0;
+    string tempTestAct = "";
+    string tempTestArg = "";
+    while(k < str.size() && str.at(k) != ' '){
+        //cout << str.at(k) << endl;
+        tempTestAct += str.at(k);
+        k++;
+    }
+    if(tempTestAct != "-e" && tempTestAct != "-d" && tempTestAct != "-f"){
+        tempTestArg = tempTestAct;
+        tempTestAct = "-e";
+    }else{
+        k++;
+        while(k < str.size()){
+            tempTestArg += str.at(k);
+            k++;
+        }
+    }
+    //cout << tempTestAct << "<- This is act"<< tempTestArg << "<- This is arg" << endl;
+    return new Test(tempTestAct, tempTestArg);
+}  
     bool newParse(string inp, commandComp* comp){
         int i = 0;
         bool start = true;
@@ -28,10 +51,11 @@ using namespace std;
                     k++;
                 }
                 k -= i + 1;
-                fillThis.push_back(makeTest_1(&i, inp.substr(i + 1, k)));
-                i += 2;
+                fillThis.push_back(makeTest_1(&i, inp.substr(i + 2, k - 1)));
+                //cout << inp.substr(i + 1, k) << endl;
+                i += k + 2;
             }
-            if(inp.at(i) == '('){
+            if(i < inp.size() && inp.at(i) == '('){
                 int k = i;
                 while(k < inp.size() && inp.at(k) != ')'){
                     k++;
@@ -149,22 +173,5 @@ using namespace std;
         comp->setVec(fillThis);
         return false;
     }
-Test* makeTest_1(int* i, string str){
-    int k = 0;
-    string tempTestAct = "";
-    string tempTestArg = "";
-    while(k < str.size() && str.at(k) != ' '){
-        tempTestAct += str.at(k);
-    }
-    if(tempTestAct != "-e" || tempTestAct != "-d" || tempTestAct != "-f"){
-        tempTestArg = tempTestAct;
-        tempTestAct = "-e";
-    }else{
-        k++
-        while(k < str.size()){
-            tempTestArg += str.at(k);
-        }
-    }
-    return new Test(tempTestAct, tempTestArg);
-}
+
 #endif
