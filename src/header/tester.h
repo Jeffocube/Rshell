@@ -34,8 +34,9 @@ class Test : public Input{
 
             int checke = stat(point.c_str(), &stat0);
 
-            if (checke != 0)
-            {
+            if (stat(point.c_str(), &stat0) != 0)
+            {   
+  		cout << "checke " << endl;
                 cout << "(False)" << endl;
             }
             else if (activity == "-f")
