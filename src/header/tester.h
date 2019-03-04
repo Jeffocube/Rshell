@@ -44,6 +44,9 @@ class Test : public Input{
                 if (stat0.st_mode & S_IFREG)
                 {
                     cout << "(True)" << endl;
+                    pass = true;
+                }else {
+                    cout << "(False)" << endl;
                 }
             }
             else if (activity == "-d")
@@ -51,6 +54,7 @@ class Test : public Input{
                 if (stat0.st_mode & S_IFDIR)
                 {
                     cout << "(True)" << endl;
+                    pass = true;
                 }
                 else
                 {
@@ -60,6 +64,7 @@ class Test : public Input{
             else
             {
                 cout << "(True)" << endl;
+                pass = true;
             }
             return i;
         }
