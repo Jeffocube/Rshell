@@ -9,6 +9,8 @@
 #include "connector.h"
 #include "command.h"
 #include "exit.h"
+#include <sys/types.h>
+#include <sys/stat.h>
 using namespace std;
 
 class Test : public Input{
@@ -19,11 +21,43 @@ class Test : public Input{
     public:
         Test(string activity, string point){
             this->activity = activity;
-            this->point = this->point;
+            this->point = point;
         }
         int execute(int i){
-            return i;
-        }
+	    struct stat stat0;
+   	    
+            int checke = stat(point.c_str(), &stat0);
+
+       	    if (checke != 0)
+	    {
+		cout << "(False)" << endl;
+	    }
+	    else if (activity == "-f")
+	    {
+	    	if (stat0.st_mode & S_IFREG)
+		{
+		    cout << "(True)" << endl;
+		}
+	    }
+	    else if (activity == "-d")
+	    {
+		if (stat0.st_mode & S_IFDIR)
+		    {
+			cout << "(True)" << endl;
+		    }
+		else
+		{
+		    cout << "(False)" << endl;
+		}
+            }
+	    else
+	    {
+		cout << "(True)" << endl;
+	    }
+            
+	
+	    return i;
+	}
         bool getPass(){
             return pass;
         }
