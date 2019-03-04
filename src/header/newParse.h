@@ -57,17 +57,29 @@ Test* makeTest_1(int* i, string str){
             }
             if(i < inp.size() && inp.at(i) == '('){
                 int k = i;
-                while(k < inp.size() && inp.at(k) != ')'){
+                int count = 0;
+                int parenth = 0;
+                while(k < inp.size()){
+                    if(inp.at(k) == '('){
+                        count++;
+                    }
+                    if(inp.at(k) == ')'){
+                        count--;
+                        parenth = k;
+                    }
                     k++;
                 }
-                k -= i + 1;
+                if(count != 0){
+                    return true;
+                }
                 commandComp* nComp = new commandComp;
-                newParse(inp.substr(i + 1, k), nComp);
-                i += k + 2;
+                //cout << inp.substr(i + 1, parenth - 1) << endl;
+                newParse(inp.substr(i + 1, parenth - 1), nComp);
+                i += parenth;
                 fillThis.push_back(nComp);
             }
             if(i < inp.size() && inp.at(i) == ')'){
-               // i++;
+                i++;
             }
             if(i < inp.size() && inp.at(i) == ' '){// to skip spaces
                 i++;
@@ -84,6 +96,7 @@ Test* makeTest_1(int* i, string str){
                     string tempCon;
                     tempCon += inp.at(i);
                     tempCon += inp.at(i + 1);
+                    //cout << "Connector" << endl;
                     fillThis.push_back(new Connector(tempCon, comp));
                     i += 2;
                 }
@@ -96,7 +109,7 @@ Test* makeTest_1(int* i, string str){
             if(i < inp.size() && (inp.at(i) != '&' && inp.at(i) != '|' && inp.at(i) != ';' && inp.at(i) != ' ' && inp.at(i) != '#' && inp.at(i) != '(')){// parsing commandLeaf
                 start = false;
                 string tempAct;
-                while( i < inp.size() && inp.at(i) != ' '){// creating activity
+                while( i < inp.size() && inp.at(i) != ' ' && inp.at(i) != '('){// creating activity
                     tempAct += inp.at(i);
                         if(inp.at(i) == '#'){
                             goto LABEL2;

@@ -25,8 +25,9 @@ class commandComp : public Input{
             //cout << comm.size() << " <- this is the size" << endl;
             int numChildren = comm.size();
             for(int k = 0; k < numChildren; k++){
+                int p = k;
                 k = comm.at(k)->execute(k);
-                if(comm.at(k)->getPass() == true)
+                if(comm.at(p)->getPass() == true)
                     pass = true;
             }
             return i;

@@ -12,9 +12,9 @@
 #include "header/exit.h"
 #include "header/newParse.h"
 #include "gtest/gtest.h"
-//#include "../unit_tests/connector_test.h"
-//#include "../unit_tests/leaf_test.h"
-//#include "../unit_tests/parse_test.h"
+#include "../unit_tests/connector_test.h"
+#include "../unit_tests/leaf_test.h"
+#include "../unit_tests/parse_test.h"
 #include "../unit_tests/parse_test2.h"
 #include "../unit_tests/test_test.h"
 
