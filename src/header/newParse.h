@@ -19,7 +19,6 @@ Test* makeTest_1(int* i, string str){
     string tempTestAct = "";
     string tempTestArg = "";
     while(k < str.size() && str.at(k) != ' '){
-        //cout << str.at(k) << endl;
         tempTestAct += str.at(k);
         k++;
     }
@@ -33,7 +32,6 @@ Test* makeTest_1(int* i, string str){
             k++;
         }
     }
-    //cout << tempTestAct << "<- This is act"<< tempTestArg << "<- This is arg" << endl;
     return new Test(tempTestAct, tempTestArg);
 }  
     bool newParse(string inp, commandComp* comp){
@@ -131,7 +129,23 @@ Test* makeTest_1(int* i, string str){
                         goto LABELS;
                     }
                 }//cout << tempAct << " <- this is tempAct" << endl;
-                if(tempAct != "exit"){// creating exit if activity was not exit
+                if(tempAct == "test"){
+                    string tempStr = "";
+                    i++;
+                    while(i < inp.size() && inp.at(i) != ' '){
+                        tempStr += inp.at(i);
+                        i++;
+                    }
+                    i++;
+                    tempStr += ' ';
+                    if(tempStr != "-e" && tempStr != "-d" && tempStr != "-f"){
+                        while(i < inp.size() && inp.at(i) != ' '){
+                            tempStr += inp.at(i);
+                            i++;
+                        }
+                    }
+                    fillThis.push_back(makeTest_1(&i, tempStr));
+                }else if(tempAct != "exit"){// creating exit if activity was not exit
                     string tempArg;
                     vector<string> tempStrVec;
                     if(inp.at(i + 1) == '"'){
