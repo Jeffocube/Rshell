@@ -11,6 +11,7 @@
 #include "header/connector.h"
 #include "header/exit.h"
 #include "header/newParse.h"
+#include "header/tester.h"
 using namespace std;
 int main(){
 	while(1){
