@@ -70,34 +70,33 @@ class commandLeaf : public Input{
             return true;
         }
         int execute(int i){
-            //cout << "executed" << endl;
-            //cout << activity << "<- did this" << endl;
+            vector<string> tempVec;
+            tempVec.push_back(activity);
+            for(int o = 0; o < args.size(); o++){
+                tempVec.push_back(args.at(o));
+            }
+            args = tempVec;
             int k = args.size();
             pid_t childPid;
             int status;
             char *argIn[k];
             string str1;
             char* str2;
-            int t = 0;
-            for(t = 0; t < k; t++){
+            for(int t = 0; t < k; t++){
                 argIn[t] = &args.at(t)[0u];
             }
             argIn[k] = NULL;
         	childPid = fork();
         	if(childPid == 0){
-                int sh = execvp(activity.c_str(), argIn - 1);
-                if(sh == -1){
-                    perror(activity.c_str());
-                    exit(EXIT_FAILURE);
-                }
-                    exit(0);
-                
-                
+               execvp(argIn[0], argIn);
+               exit(errno);
         	}else{
         		wait(&status);
         		if(status == 0){
         		    pass = true;
-        		}
+        		}else{
+                pass = false;
+            }
         	}
         	return i;
         }
