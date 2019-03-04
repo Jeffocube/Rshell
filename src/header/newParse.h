@@ -14,7 +14,7 @@
 #include "tester.h"
 using namespace std;
 Test* makeTest_1(int* i, string str){
-    cout << str << endl;
+    //cout << str << endl;
     int k = 0;
     string tempTestAct = "";
     string tempTestArg = "";
