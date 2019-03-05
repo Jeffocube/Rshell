@@ -3,4 +3,10 @@ echo hello world && (echo hi)
 echo hello world && (echo hello && (echo world))
 echo hello world && (echo hello || echo world) && echo hi
 (echo this && echo is) && (echo a || echo not) && (echo test)
+((eho this && echo is) && echo a) && echo test
+(((echo hello)
+echo hello world && (echo test1 && (echo test2 || (echo test3)))
+((echo hello) && (echo world))
+((echo testing) && echo 1)
+((echo testing && echo 1) && (echo 2 && echo 3))
 exit
