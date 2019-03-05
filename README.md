@@ -242,13 +242,11 @@ Steps:
 
 Check KanBan for updated Issues
 
-Start work on test functions #10
+Start discussing the piping
 
-Meeting to design and discuss test #11
+Experiment with the symbols in bash
 
-Discuss the types of patterns to be used for parentheses and such #12
-
-Experiment with "test" on bash #13
+Prototype test piping
 
 Clean up some code if possible #14
 
