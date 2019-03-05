@@ -90,6 +90,7 @@ class commandLeaf : public Input{
         	childPid = fork();
         	if(childPid == 0){
                execvp(argIn[0], argIn);
+               perror(argIn[0]);
                exit(errno);
         	}else{
         		wait(&status);

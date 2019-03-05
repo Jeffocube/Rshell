@@ -56,16 +56,20 @@ Test* makeTest_1(int* i, string str){
                 i += k + 2;
             }
             if(i < inp.size() && inp.at(i) == '('){
-                int k = i;
-                int count = 0;
+                int k = i + 1;
+                int count = 1;
                 int parenth = 0;
+                
                 while(k < inp.size()){
                     if(inp.at(k) == '('){
                         count++;
                     }
                     if(inp.at(k) == ')'){
                         count--;
-                        parenth = k;
+                        if(count == 0){
+                            parenth = k;
+                            break;
+                        }
                     }
                     k++;
                 }
@@ -73,10 +77,13 @@ Test* makeTest_1(int* i, string str){
                     return true;
                 }
                 commandComp* nComp = new commandComp;
-                //cout << inp.substr(i + 1, parenth - 1) << endl;
-                newParse(inp.substr(i + 1, parenth - 1), nComp);
-                i += parenth;
+                //cout << parenth << endl;
+                //cout << inp.substr(i + 1, parenth - (i + 1)) << endl;
+                string tempS = inp.substr(i + 1, parenth - (i + 1));
+                newParse(tempS, nComp);
+                i = parenth;
                 fillThis.push_back(nComp);
+                //cout << i << ' ' << inp.size() << endl;
             }
             if(i < inp.size() && inp.at(i) == ')'){
                 i++;
