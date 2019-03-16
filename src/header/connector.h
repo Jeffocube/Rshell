@@ -33,6 +33,14 @@ class Connector : public Input{
             }else if(parent->getInComm(i - 1) == true && activity == ";"){
                 // cout << "SEMICOLON" << endl;
                 return i;
+            }else if(activity == ">"){
+                //code for redirect
+            }else if(activity == "<"){
+                //code for opposite redirect
+            }else if(activity == "|"){
+                //code for pipe
+            }else if(activity == ">>"){
+                //code for redirect append
             }else{
                 return i;
             }
