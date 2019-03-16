@@ -235,6 +235,93 @@ Last file modification:   Wed Feb 27 18:52:51 2019
 ```
 how extensive we can make a file status program, adding as few or many items of information to check.
 
+Prototyping dup and pipe :
+
+dup/dup2 -> creates a copy of a given file descriptor (fd)
+pipe -> acts as a queue data structure FIFO
+
+```
+#include <stdio.h> 
+#include <unistd.h> 
+#define MSGSIZE 16 
+char* msg1 = "hello, world #1"; 
+char* msg2 = "hello, world #2"; 
+char* msg3 = "hello, world #3"; 
+  
+int main() 
+{ 
+    char inbuf[MSGSIZE]; 
+    int p[2], i; 
+  
+    if (pipe(p) < 0) 
+        exit(1); 
+  
+    /* continued */
+    /* write pipe */
+  
+    write(p[1], msg1, MSGSIZE); 
+    write(p[1], msg2, MSGSIZE); 
+    write(p[1], msg3, MSGSIZE); 
+  
+    for (i = 0; i < 3; i++) { 
+        /* read pipe */
+        read(p[0], inbuf, MSGSIZE); 
+        printf("% s\n", inbuf); 
+    } 
+    return 0; 
+} 
+```
+This block of code is an example of using pipe to output a queue of strings.
+
+```
+int main() 
+{ 
+    // open() returns a file descriptor file_desc to a  
+    // the file "dup.txt" here" 
+  
+    int file_desc = open("dup.txt", O_WRONLY | O_APPEND); 
+      
+    if(file_desc < 0) 
+        printf("Error opening the file\n"); 
+      
+    // dup() will create the copy of file_desc as the copy_desc 
+    // then both can be used interchangeably. 
+  
+    int copy_desc = dup(file_desc); 
+          
+    // write() will write the given string into the file 
+    // referred by the file descriptors 
+  
+    write(copy_desc,"This will be output to the file named dup.txt\n", 46); 
+          
+    write(file_desc,"This will also be output to the file named dup.txt\n", 51); 
+      
+    return 0; 
+} 
+```
+This block of code for dup shows how it is essentially used. Notice the two fd's can be used interchangeably.
+```
+// CPP program to illustrate dup2()  
+#include<stdlib.h> 
+#include<unistd.h> 
+#include<stdio.h> 
+#include<fcntl.h> 
+  
+int main() 
+{ 
+    int file_desc = open("tricky.txt",O_WRONLY | O_APPEND); 
+      
+    // here the newfd is the file descriptor of stdout (i.e. 1) 
+    dup2(file_desc, 1) ;  
+          
+    // All the printf statements will be written in the file 
+    // "tricky.txt" 
+    printf("I will be printed in the file tricky.txt\n"); 
+      
+return 0; 
+} 
+```
+The dup2() system call is similar to dup() but the basic difference between them is that instead of using the lowest-numbered unused file descriptor, it uses the descriptor number specified by the user.
 
 # Developing and Testing Roadmap:
 
