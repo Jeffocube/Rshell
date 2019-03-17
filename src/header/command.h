@@ -25,7 +25,7 @@ class commandComp : public Input{
             int numChildren = comm.size();
             for(int k = 0; k < numChildren; k++){
                 int p = k;
-                if(k < (comm.size() - 2)){
+                if(k < (comm.size() - 1)){
                   if(comm.at(k + 1)->getActivity(k) == "<" ||
                     comm.at(k + 1)->getActivity(k) == ">"  ||
                     comm.at(k + 1)->getActivity(k) == ">>" ||
