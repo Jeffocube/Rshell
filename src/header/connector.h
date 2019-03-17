@@ -1,10 +1,12 @@
 #ifndef CONNECTOR_H
 #define CONNECTOR_H
+#include <fstream>
 #include <vector>
 #include <unistd.h>
 #include <iostream>
 #include <string>
 #include <sys/types.h>
+#include <ifstream>
 #include <sys/wait.h>
 #include "command.h"
 #include "input.h"
@@ -38,6 +40,7 @@ class Connector : public Input{
                 string filename = parent->getActivity(i+1);
                 int newOut = open(filename.c_str(), O_WRONLY);
                 int dupout = dup(1);
+                
                 close(1);
                 
                 dup(newOut);
@@ -46,7 +49,13 @@ class Connector : public Input{
                 //return lhs execute with outfd 
             }else if(activity == "<"){
                 //code for opposite redirect
+                string filename = parent->getActivity(i+1);
+                int newIn = open(filename.c_str(), O_RDONLY);
+                int dupin = dup(0);
                 
+                close(0);
+                
+                dup(stdin);
             }else if(activity == "|"){
                 //code for pipe
             }else if(activity == ">>"){
