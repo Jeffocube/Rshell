@@ -104,14 +104,13 @@ Test* makeTest_1(int* i, string str){
                     string tempCon;
                     tempCon += inp.at(i);
                     tempCon += inp.at(i + 1);
-                    //cout << "Connector" << endl;
-                    cout << tempCon << endl;
+                    //cout << tempCon << endl;
                     fillThis.push_back(new Connector(tempCon, comp));
                     i += 2;
                 }else{
                     string tempCon;
                     tempCon += inp.at(i);
-                    cout << tempCon << endl;
+                    //cout << tempCon << endl;
                     fillThis.push_back(new Connector(tempCon, comp));
                     i++;
                 }

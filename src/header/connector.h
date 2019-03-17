@@ -10,6 +10,9 @@
 #include <sys/wait.h>
 #include "command.h"
 #include "input.h"
+#include <fstream>
+#include <sys/stat.h> 
+#include <fcntl.h>
 using namespace std;
 
 class Connector : public Input{
@@ -40,10 +43,12 @@ class Connector : public Input{
                 string filename = parent->getActivity(i+1);
                 int newOut = open(filename.c_str(), O_WRONLY);
                 int dupout = dup(1);
-                
                 close(1);
-                
-                dup(newOut);
+
+                dup2(newOut, 1);
+                parent->execOne(i - 1);
+
+                //dup(newOut);
                 
                 return i+1;
                 //return lhs execute with outfd 
