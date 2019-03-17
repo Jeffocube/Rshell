@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string>
 #include <sys/types.h>
-#include <ifstream>
+//#include <ifstream>
 #include <sys/wait.h>
 #include "command.h"
 #include "input.h"
@@ -41,26 +41,25 @@ class Connector : public Input{
             }else if(activity == ">"){
                 //code for input redirect
                 string filename = parent->getActivity(i+1);
-                int newOut = open(filename.c_str(), O_WRONLY);
                 int dupout = dup(1);
-                close(1);
-
+                int newOut = open(filename.c_str(), O_WRONLY);
                 dup2(newOut, 1);
                 parent->execOne(i - 1);
-
+                close(newOut);
+                dup2(dupout, 1);
                 //dup(newOut);
                 
                 return i+1;
                 //return lhs execute with outfd 
             }else if(activity == "<"){
                 //code for opposite redirect
-                string filename = parent->getActivity(i+1);
-                int newIn = open(filename.c_str(), O_RDONLY);
-                int dupin = dup(0);
+                //string filename = parent->getActivity(i+1);
+                //int newIn = open(filename.c_str(), O_RDONLY);
+                //int dupin = dup(0);
                 
-                close(0);
+                //close(0);
                 
-                dup(stdin);
+                //dup(stdin);
             }else if(activity == "|"){
                 //code for pipe
                 
