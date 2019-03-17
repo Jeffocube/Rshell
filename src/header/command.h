@@ -26,6 +26,10 @@ class commandComp : public Input{
             int numChildren = comm.size();
             for(int k = 0; k < numChildren; k++){
                 int p = k;
+                if(comm.at(k + 1) == "<" || comm.at(k + 1) == ">" 
+                || comm.at(k + 1) == ">>" || comm.at(k + 1) == "|" || ){
+                    k++;
+                }
                 k = comm.at(k)->execute(k);
                 if(comm.at(p)->getPass() == true)
                     pass = true;
