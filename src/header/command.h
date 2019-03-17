@@ -25,9 +25,13 @@ class commandComp : public Input{
             int numChildren = comm.size();
             for(int k = 0; k < numChildren; k++){
                 int p = k;
-                if(comm.at(k + 1) == "<" || comm.at(k + 1) == ">" 
-                || comm.at(k + 1) == ">>" || comm.at(k + 1) == "|" || ){
-                    k++;
+                if(k < (comm.size() - 1)){
+                  if(comm.at(k + 1)->getActivity(k) == "<" ||
+                    comm.at(k + 1)->getActivity(k) == ">"  ||
+                    comm.at(k + 1)->getActivity(k) == ">>" ||
+                    comm.at(k + 1)->getActivity(k) == "|" ){
+                      k++;
+                  }
                 }
                 k = comm.at(k)->execute(k);
                 if(comm.at(p)->getPass() == true)
@@ -36,7 +40,7 @@ class commandComp : public Input{
             return i;
         }
         int execOne(int i){
-            comm.at(i)->execute();
+            comm.at(i)->execute(i);
             return i;
         }
         bool getInComm(int i){// returns the pass of an element in the vector at i
