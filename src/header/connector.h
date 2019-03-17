@@ -6,11 +6,9 @@
 #include <iostream>
 #include <string>
 #include <sys/types.h>
-#include <ifstream>
 #include <sys/wait.h>
 #include "command.h"
 #include "input.h"
-#include <fstream>
 #include <sys/stat.h> 
 #include <fcntl.h>
 using namespace std;
@@ -60,7 +58,7 @@ class Connector : public Input{
                 
                 close(0);
                 
-                dup(stdin);
+                dup(newIn);
             }else if(activity == "|"){
                 //code for pipe
                 
