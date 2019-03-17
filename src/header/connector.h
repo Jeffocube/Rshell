@@ -65,6 +65,16 @@ class Connector : public Input{
                 
             }else if(activity == ">>"){
                 //code for redirect append
+                string filename = parent->getActivity(i+1);
+                int dupout = dup(1);
+                int newOut = open(filename.c_str(), O_WRONLY | O_APPEND);
+                dup2(newOut, 1);
+                parent->execOne(i - 1);
+                close(newOut);
+                dup2(dupout, 1);
+                //dup(newOut);
+                
+                return i+1;
             }else{
                 return i;
             }
