@@ -22,7 +22,6 @@ class commandComp : public Input{
             comm = vec;
         }
         int execute(int i){
-            //cout << comm.size() << " <- this is the size" << endl;
             int numChildren = comm.size();
             for(int k = 0; k < numChildren; k++){
                 int p = k;
@@ -36,23 +35,27 @@ class commandComp : public Input{
             }
             return i;
         }
-        bool getInComm(int i){
+        int execOne(int i){
+            comm.at(i)->execute();
+            return i;
+        }
+        bool getInComm(int i){// returns the pass of an element in the vector at i
             return comm.at(i)->getPass();
         }
-        bool getPass(){
+        bool getPass(){//returns the pass of the commandComp;
             return pass;
         }
-        int getSize(){
+        int getSize(){//returns the size of the commandComp
             return comm.size();
         }
-        bool setPPass(bool b, int i){
+        bool setPPass(bool b, int i){//sets the pass of an object inside
             comm.at(i)->setPass(b, i);
             return true;
         }
-        bool setPass(bool b, int i){
+        bool setPass(bool b, int i){//sets its own pass
             pass = b;
         }
-        string getActivity(int i){
+        string getActivity(int i){//gets activity of an object at i
             return comm.at(i)->getActivity(i);
         }
 };
