@@ -58,6 +58,7 @@ class Connector : public Input{
                 dup(stdin);
             }else if(activity == "|"){
                 //code for pipe
+                
             }else if(activity == ">>"){
                 //code for redirect append
             }else{
