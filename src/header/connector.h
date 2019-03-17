@@ -37,6 +37,14 @@ class Connector : public Input{
                 // cout << "SEMICOLON" << endl;
                 return i;
             }else if(activity == ">"){
+                //code for input redirect
+                string filename = parent->getActivity(i+1);
+                int newOut = open(filename.c_str(), O_WRONLY);
+                dup2(newOut, 1);
+                parent->execOne(i - 1);
+                
+                //dup(newOut);
+                
                 return i+1;
                 //return lhs execute with outfd 
             }else if(activity == "<"){
