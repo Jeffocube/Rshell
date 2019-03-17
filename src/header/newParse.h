@@ -94,7 +94,8 @@ Test* makeTest_1(int* i, string str){
             if(i < inp.size() && inp.at(i) == '#'){
                 goto LABEL2;
             }
-            if(i < inp.size() && (inp.at(i) == '&' || inp.at(i) == '|' || inp.at(i) == ';')){// this is to add connectors
+            if(i < inp.size() && (inp.at(i) == '&' || inp.at(i) == '|' || inp.at(i) == ';' 
+            || inp.at(i) == '<' || inp.at(i) == '>')){// this is to add connectors
                 LABELSEMI:
                 if(comp->getSize() == 0 && i > inp.size() - 3){
                     return true;
@@ -104,8 +105,15 @@ Test* makeTest_1(int* i, string str){
                     tempCon += inp.at(i);
                     tempCon += inp.at(i + 1);
                     //cout << "Connector" << endl;
+                    cout << tempCon << endl;
                     fillThis.push_back(new Connector(tempCon, comp));
                     i += 2;
+                }else{
+                    string tempCon;
+                    tempCon += inp.at(i);
+                    cout << tempCon << endl;
+                    fillThis.push_back(new Connector(tempCon, comp));
+                    i++;
                 }
                 if(inp.at(i) == ';'){
                     fillThis.push_back(new Connector(";" , comp));
@@ -113,7 +121,9 @@ Test* makeTest_1(int* i, string str){
                 }
                 start = false;
             }
-            if(i < inp.size() && (inp.at(i) != '&' && inp.at(i) != '|' && inp.at(i) != ';' && inp.at(i) != ' ' && inp.at(i) != '#' && inp.at(i) != '(')){// parsing commandLeaf
+            if(i < inp.size() && (inp.at(i) != '&' && inp.at(i) != '|' && inp.at(i) != ';' 
+            && inp.at(i) != ' ' && inp.at(i) != '#' && inp.at(i) != '(') && inp.at(i) != '<'
+            && inp.at(i) != '>'){// parsing commandLeaf
                 start = false;
                 string tempAct;
                 while( i < inp.size() && inp.at(i) != ' ' && inp.at(i) != '('){// creating activity
@@ -136,7 +146,9 @@ Test* makeTest_1(int* i, string str){
                         }
                         goto LABEL2;
                     }
-                    else if(i < (inp.size() - 2) && (inp.at(i + 2) == '|' || inp.at(i + 2) == '&' || inp.at(i + 1) == ';')){
+                    else if(i < (inp.size() - 2) && (inp.at(i + 2) == '|' || inp.at(i + 2) == '&' 
+                    || inp.at(i + 1) == ';' || inp.at(i + 1) == '|' 
+                    && inp.at(i) != '<' && inp.at(i) != '>')){
                         vector<string> empVec;
                         tempAct += inp.at(i);
                         i++;
@@ -185,7 +197,8 @@ Test* makeTest_1(int* i, string str){
                         //cout << "Made a quote" << endl;
                         goto LABELNAME;
                     }
-                    while(i < inp.size() && inp.at(i) != '\0' && inp.at(i) != '&' && inp.at(i) != '|' && inp.at(i) != ';'){// parsing the arguments
+                    while(i < inp.size() && inp.at(i) != '\0' && inp.at(i) != '&' && inp.at(i) != '|' 
+                    && inp.at(i) != ';' && inp.at(i) != '<' && inp.at(i) != '>'){// parsing the arguments
                     //cout << "Through here" << endl;
                         if(inp.at(i) == ' '){
                             i++;
@@ -193,7 +206,9 @@ Test* makeTest_1(int* i, string str){
                         if(i < inp.size() && inp.at(i) == '#'){
                             goto LABELNAME;
                         }
-                        while( i < inp.size() && inp.at(i) != ' ' && inp.at(i) != '\0' && inp.at(i) != '&' && inp.at(i) != '|' && inp.at(i) != ';' && inp.at(i) != '#'){// goes through each word. Ends if there is a space or NULL
+                        while( i < inp.size() && inp.at(i) != ' ' && inp.at(i) != '\0' && inp.at(i) != '&' 
+                        && inp.at(i) != '|' && inp.at(i) != ';' && inp.at(i) != '#'
+                         && inp.at(i) != '<' && inp.at(i) != '>'){// goes through each word. Ends if there is a space or NULL
                             tempArg += inp.at(i);
                             i++;
                         }//cout << tempArg << endl;
