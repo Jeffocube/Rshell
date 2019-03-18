@@ -38,7 +38,7 @@ class commandComp : public Input{
             int numChildren = comm.size();
             for(int j = 0; j < numChildren; j++){
                 if(comm.at(j)->getActivity(j) == "|"){
-                    comm.at(j)->execute(i);
+                    comm.at(j)->execute(j);
                 }
             }
             for(int k = 0; k < numChildren; k++){
