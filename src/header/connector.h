@@ -77,7 +77,7 @@ class Connector : public Input{
 		parent->get(i - 1)->out = fds[1];
 		parent->get(i + 1)->in = fds[0];
 	        	
-	
+	        
 		
 
 		//think this works?
