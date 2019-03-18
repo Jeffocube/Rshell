@@ -36,6 +36,11 @@ class commandComp : public Input{
         }
         int execute(int i){
             int numChildren = comm.size();
+            for(int j = 0; j < numChildren; j++){
+                if(comm.at(j)->getActivity(j) == "|"){
+                    comm.at(j)->execute(i);
+                }
+            }
             for(int k = 0; k < numChildren; k++){
                 int p = k;
                 if(k < (comm.size() - 1)){
@@ -72,6 +77,7 @@ class commandComp : public Input{
         }
         bool setPass(bool b, int i){//sets its own pass
             pass = b;
+            return true;
         }
         string getActivity(int i){//gets activity of an object at i
             return comm.at(i)->getActivity(i);
@@ -99,14 +105,14 @@ class commandLeaf : public Input{
             pass = b;
             return true;
         }
-	void setIN(int in1)
-	{
-		in = in1;
-	}
-	void setOUT(int out1)
-	{
-		out = out1;
-	}
+      	void setIN(int in1)
+      	{
+      		in = in1;
+      	}
+      	void setOUT(int out1)
+      	{
+      		out = out1;
+      	}
         int execute(int i){
             vector<string> tempVec;
             tempVec.push_back(activity);
@@ -127,11 +133,11 @@ class commandLeaf : public Input{
             argIn[k] = NULL;
         	childPid = fork();
         	if(childPid == 0){
-cout << "in out = " << in << " " << out << endl;
-
-	    dup2(out,1);
-            dup2(in,0);
-//cout << "in out = " << in << " " << out << endl;
+            cout << "in out = " << in << " " << out << endl;
+            
+            	    dup2(out,1);
+                        dup2(in,0);
+            //cout << "in out = " << in << " " << out << endl;
                execvp(argIn[0], argIn);
                perror(argIn[0]);
                exit(errno);

@@ -66,14 +66,14 @@ class Connector : public Input{
                 return i + 1;
             }else if(activity == "|"){ 
                 //code for pipe
-		int pipeEnds[2];
-		
-		pipe(pipeEnds);
-//cout << "pipeEnds1 = " << pipeEnds[0] << " two = " << pipeEnds[1] << endl;
-		parent->get(i - 1)->out = pipeEnds[1];
-		parent->get(i + 1)->in = pipeEnds[0];
-
-		return i+1; 
+              		int pipeEnds[2];
+              		
+              		pipe(pipeEnds);
+              //cout << "pipeEnds1 = " << pipeEnds[0] << " two = " << pipeEnds[1] << endl;
+              		parent->get(i - 1)->out = pipeEnds[1];
+              		parent->get(i + 1)->in = pipeEnds[0];
+              
+              		return i+1; 
 		         
             }else if(activity == ">>"){
                 //code for redirect append
@@ -85,7 +85,7 @@ class Connector : public Input{
                 close(newOut);
                 dup2(dupout, 1);
                 //dup(newOut);
-                
+                parent->setPPass(true, i + 1);
                 return i+1;
             }else{
                 return i;
