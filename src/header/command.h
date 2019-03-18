@@ -114,7 +114,7 @@ class commandLeaf : public Input{
 
 	    
 	    dup2(out,STDOUT_FILENO);
-	    close(
+	    
             for(int t = 0; t < k; t++){
                 argIn[t] = &args.at(t)[0u];
             }
