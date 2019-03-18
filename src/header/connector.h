@@ -41,6 +41,8 @@ class Connector : public Input{
                 return i;
             }else if(activity == ">"){
                 //code for input redirect
+                
+		/*
                 string filename = parent->getActivity(i+1);
                 int dupout = dup(1);
                 int newOut = open(filename.c_str(), O_WRONLY);
@@ -51,7 +53,20 @@ class Connector : public Input{
                 //dup(newOut);
                 
                 return i+1;
-                //return lhs execute with outfd 
+		*/
+		
+		string outf = parent->getActivity(i + 1);
+		int outFd =  open(outf.c_str(),O_WRONLY| O_TRUNC | O_CREAT, S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
+		
+		parent->get(i - 1)->out = outFd;
+		int dupout = dup(1);
+		dup2(outFd, 1);
+		parent->execOne(i-1);
+		close(outFd);
+
+		dup2(dupout, 1);
+
+		return i+1;
             }else if(activity == "<"){
                 string filename = parent->getActivity(i + 1);
                 int dupIn = dup(0);
