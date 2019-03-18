@@ -71,7 +71,14 @@ class Connector : public Input{
                 return i + 1;
             }else if(activity == "|"){
                 //code for pipe
-                
+                int fds[2];
+		
+		pipe(fds);
+		
+		
+		
+
+		 
             }else if(activity == ">>"){
                 //code for redirect append
                 string filename = parent->getActivity(i+1);
