@@ -92,8 +92,8 @@ class commandLeaf : public Input{
             this->activity = activity;
             this->args = args;
             pass = false;
-            int in = 0;
-            int out = 1;
+            in = 0;
+            out = 1;
         }
         bool setPass(bool b, int i){
             pass = b;
