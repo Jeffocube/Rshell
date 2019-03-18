@@ -20,11 +20,15 @@ class Connector : public Input{
         bool pass;
         string activity;
         commandComp* parent;
+        int in;
+        int out;
     public:
         Connector(string activity, commandComp* parent){
             this->activity = activity;
             this->parent = parent;
             pass = false;
+            in = 0;
+            out = 1;
         }
         int execute(int i){
             // cout << "Connector executed" << endl;
@@ -43,12 +47,14 @@ class Connector : public Input{
                 string filename = parent->getActivity(i+1);
                 int dupout = dup(1);
                 int newOut = open(filename.c_str(), O_WRONLY);
+                if(newOut == -1){
+                    std::ofstream ofs (filename, std::ofstream::out);
+                    newOut = open(filename.c_str(), O_WRONLY);
+                }
                 dup2(newOut, 1);
                 parent->execOne(i - 1);
                 close(newOut);
                 dup2(dupout, 1);
-                //dup(newOut);
-                
                 return i+1;
                 //return lhs execute with outfd 
             }else if(activity == "<"){
@@ -60,6 +66,8 @@ class Connector : public Input{
                 parent->execOne(i - 1);
                 close(newIn);
                 dup2(dupIn, 0);
+                this->setPass(parent->execOne(i - 1), 1);
+                parent->setPPass(true, i + 1);
                 return i + 1;
             }else if(activity == "|"){
                 //code for pipe
@@ -76,10 +84,16 @@ class Connector : public Input{
                 string filename = parent->getActivity(i+1);
                 int dupout = dup(1);
                 int newOut = open(filename.c_str(), O_WRONLY | O_APPEND);
+                if(newOut == -1){
+                    std::ofstream ofs (filename, std::ofstream::out);
+                    newOut = open(filename.c_str(), O_WRONLY | O_APPEND);
+                }
                 dup2(newOut, 1);
                 parent->execOne(i - 1);
                 close(newOut);
                 dup2(dupout, 1);
+                this->setPass(parent->execOne(i - 1), 1);
+                parent->setPPass(true, i + 1);
                 //dup(newOut);
                 
                 return i+1;

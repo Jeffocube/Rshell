@@ -16,7 +16,11 @@ class commandComp : public Input{
         vector<Input*> comm;
         bool pass = false;
     public:
+        int in;
+        int out;
         commandComp(){
+            int in = 0;
+            int out = 1;
         }
         void setVec(vector<Input*> vec){
             comm = vec;
@@ -69,6 +73,8 @@ class commandLeaf : public Input{
         vector<string> args;
         bool pass;
     public:
+        int in;
+        int out;
         bool getPass(){
             return pass;
         }
@@ -76,6 +82,8 @@ class commandLeaf : public Input{
             this->activity = activity;
             this->args = args;
             pass = false;
+            int in = 0;
+            int out = 1;
         }
         bool setPass(bool b, int i){
             pass = b;

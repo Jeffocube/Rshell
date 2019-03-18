@@ -9,11 +9,14 @@
 using namespace std;
 
 class Input{
+    private:
     public:
         virtual int execute(int ) = 0;
         virtual bool getPass() = 0;
         virtual bool setPass(bool, int) = 0;
         virtual string getActivity(int i) = 0;
+        int in;
+        int out;
 };
 
 #endif
