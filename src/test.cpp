@@ -16,6 +16,7 @@
 #include "../unit_tests/leaf_test.h"
 #include "../unit_tests/parse_test.h"
 #include "../unit_tests/parse_test2.h"
+#include "../unit_tests/parse_test3.h"
 #include "../unit_tests/test_test.h"
 #include "../unit_tests/d_c_test.h"
 
