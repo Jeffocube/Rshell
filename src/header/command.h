@@ -25,8 +25,8 @@ class commandComp : public Input{
             return comm.at(i)->out;
         }
         commandComp(){
-            int in = 0;
-            int out = 1;
+            //int in = 0;
+            //int out = 1;
         }
         void setVec(vector<Input*> vec){
             comm = vec;
@@ -92,8 +92,8 @@ class commandLeaf : public Input{
             this->activity = activity;
             this->args = args;
             pass = false;
-            in = 0;
-            out = 1;
+//            in = 0;
+//            out = 1;
         }
         bool setPass(bool b, int i){
             pass = b;
@@ -131,7 +131,7 @@ cout << "in out = " << in << " " << out << endl;
 
 	    dup2(out,1);
             dup2(in,0);
-cout << "in out = " << in << " " << out << endl;
+//cout << "in out = " << in << " " << out << endl;
                execvp(argIn[0], argIn);
                perror(argIn[0]);
                exit(errno);

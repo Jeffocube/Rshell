@@ -15,8 +15,8 @@ class Input{
         virtual bool getPass() = 0;
         virtual bool setPass(bool, int) = 0;
         virtual string getActivity(int i) = 0;
-        int in;
-        int out;
+        int in = 0;
+        int out = 1;
 };
 
 #endif
