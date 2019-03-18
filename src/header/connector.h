@@ -73,7 +73,7 @@ class Connector : public Input{
               		parent->get(i - 1)->out = pipeEnds[1];
               		parent->get(i + 1)->in = pipeEnds[0];
               
-              		return i+1; 
+              		return i; 
 		         
             }else if(activity == ">>"){
                 //code for redirect append
