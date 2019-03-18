@@ -12,7 +12,12 @@ using namespace std;
 
 class ExitObj : public Input{
     public:
-    ExitObj(){ }
+    int in;
+    int out;
+    ExitObj(){ 
+        int in = 0;
+        int out = 1;
+    }
     int execute(int i){
         // cout << "Hello4" << endl;
         exit(0);
