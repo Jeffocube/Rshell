@@ -75,8 +75,8 @@ class Connector : public Input{
 		
 		pipe(fds);
 		
-		
-		
+		parent->
+	        	
 
 		 
             }else if(activity == ">>"){
