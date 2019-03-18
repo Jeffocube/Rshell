@@ -1,0 +1,5 @@
+echo hello > temp.txt
+echo hi > temp.txt
+echo this is being appended >> temp.txt
+echo i cant wait for this to be over >> temp.txt
+exit
