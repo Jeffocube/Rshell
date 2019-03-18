@@ -31,6 +31,9 @@ class commandComp : public Input{
         void setVec(vector<Input*> vec){
             comm = vec;
         }
+        Input* get(int i){
+            return comm.at(i);
+        }
         int execute(int i){
             int numChildren = comm.size();
             for(int k = 0; k < numChildren; k++){
