@@ -69,7 +69,7 @@ class Connector : public Input{
               		int pipeEnds[2];
               		
               		pipe(pipeEnds);
-              //cout << "pipeEnds1 = " << pipeEnds[0] << " two = " << pipeEnds[1] << endl;
+                  //cout << "pipeEnds1 = " << pipeEnds[0] << " two = " << pipeEnds[1] << endl;
               		parent->get(i - 1)->out = pipeEnds[1];
               		parent->get(i + 1)->in = pipeEnds[0];
               
