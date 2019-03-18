@@ -60,6 +60,8 @@ class Connector : public Input{
                 parent->execOne(i - 1);
                 close(newIn);
                 dup2(dupIn, 0);
+                this->setPass(parent->execOne(i - 1), 1);
+                parent->setPPass(true, i + 1);
                 return i + 1;
             }else if(activity == "|"){
                 //code for pipe
@@ -73,6 +75,8 @@ class Connector : public Input{
                 parent->execOne(i - 1);
                 close(newOut);
                 dup2(dupout, 1);
+                this->setPass(parent->execOne(i - 1), 1);
+                parent->setPPass(true, i + 1);
                 //dup(newOut);
                 
                 return i+1;
