@@ -112,9 +112,15 @@ class commandLeaf : public Input{
             string str1;
             char* str2;
 
+<<<<<<< HEAD
 	    //dup2(in,0);
 	    //dup2(out,1);
 
+=======
+	    
+	    dup2(out,STDOUT_FILENO);
+	    
+>>>>>>> f1c2bcbbc56a29b1237777da96a923a73f74b429
             for(int t = 0; t < k; t++){
                 argIn[t] = &args.at(t)[0u];
             }
