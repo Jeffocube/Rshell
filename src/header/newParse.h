@@ -147,7 +147,7 @@ Test* makeTest_1(int* i, string str){
                     }
                     else if(i < (inp.size() - 2) && (inp.at(i + 2) == '|' || inp.at(i + 2) == '&' 
                     || inp.at(i + 1) == ';' || inp.at(i + 1) == '|' 
-                    && inp.at(i) != '<' && inp.at(i) != '>')){
+                    || inp.at(i + 1) == '<' || inp.at(i + 1) == '>')){
                         vector<string> empVec;
                         tempAct += inp.at(i);
                         i++;
