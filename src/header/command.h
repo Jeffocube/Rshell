@@ -18,6 +18,12 @@ class commandComp : public Input{
     public:
         int in;
         int out;
+        int getCommIn(int i){
+            return comm.at(i)->in;
+        }
+        int getCommOut(int i){
+            return comm.at(i)->out;
+        }
         commandComp(){
             int in = 0;
             int out = 1;
