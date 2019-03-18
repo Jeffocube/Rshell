@@ -1,0 +1,13 @@
+echo echo hello > temp.txt
+./rshell < temp.txt
+exit
+echo ls -a >> temp.txt
+./rshell < temp.txt
+exit
+echo ls -j >> temp.txt
+./rshell < temp.txt
+exit
+echo this is being appended >> temp.txt
+./rshell < temp.txt
+exit
+exit

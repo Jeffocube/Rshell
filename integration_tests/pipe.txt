@@ -1,0 +1,4 @@
+echo hello | ./rshell > text.txt
+ls | ./rshell > text.txt
+ls -a | ./rshell > text.txt
+exit
