@@ -15,6 +15,8 @@ class commandComp : public Input{
     private:
         vector<Input*> comm;
         bool pass = false;
+        int in = 0;
+        int out = 1;
     public:
         commandComp(){
         }
@@ -68,6 +70,8 @@ class commandLeaf : public Input{
         string activity;
         vector<string> args;
         bool pass;
+        int in = 0;
+        int out = 1;
     public:
         bool getPass(){
             return pass;

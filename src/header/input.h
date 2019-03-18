@@ -9,6 +9,9 @@
 using namespace std;
 
 class Input{
+    private:
+        int in;
+        int out;
     public:
         virtual int execute(int ) = 0;
         virtual bool getPass() = 0;
