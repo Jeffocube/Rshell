@@ -62,6 +62,8 @@ class Connector : public Input{
                 string filename = parent->getActivity(i + 1);
                 int dupIn = dup(0);
                 int newIn = open(filename.c_str(), O_RDONLY);
+                if(newIn == -1)
+                    return i + 1;
                 dup2(newIn, 0);
                 parent->execOne(i - 1);
                 close(newIn);
