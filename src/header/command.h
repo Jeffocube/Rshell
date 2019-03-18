@@ -46,10 +46,11 @@ class commandComp : public Input{
                 if(k < (comm.size() - 1)){
                   if(comm.at(k + 1)->getActivity(k) == "<" ||
                     comm.at(k + 1)->getActivity(k) == ">"  ||
-                    comm.at(k + 1)->getActivity(k) == ">>" ||
-                    comm.at(k + 1)->getActivity(k) == "|" ){
+                    comm.at(k + 1)->getActivity(k) == ">>"){
                       k++;
                   }
+                  if(comm.at(k)->getActivity(k) == "|")
+                      k++;
                 }
            
                 k = comm.at(k)->execute(k);
