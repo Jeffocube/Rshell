@@ -16,8 +16,8 @@ class commandComp : public Input{
         vector<Input*> comm;
         bool pass = false;
     public:
-        int in;
-        int out;
+       // int in;
+      //  int out;
         int getCommIn(int i){
             return comm.at(i)->in;
         }
@@ -46,6 +46,7 @@ class commandComp : public Input{
                       k++;
                   }
                 }
+           
                 k = comm.at(k)->execute(k);
                 if(comm.at(p)->getPass() == true)
                     pass = true;
@@ -82,8 +83,8 @@ class commandLeaf : public Input{
         vector<string> args;
         bool pass;
     public:
-        int in;
-        int out;
+//        int in;
+//        int out;
         bool getPass(){
             return pass;
         }
@@ -98,6 +99,14 @@ class commandLeaf : public Input{
             pass = b;
             return true;
         }
+	void setIN(int in1)
+	{
+		in = in1;
+	}
+	void setOUT(int out1)
+	{
+		out = out1;
+	}
         int execute(int i){
             vector<string> tempVec;
             tempVec.push_back(activity);
@@ -112,15 +121,17 @@ class commandLeaf : public Input{
             string str1;
             char* str2;
 
-	    
-	    dup2(out,STDOUT_FILENO);
-	    
             for(int t = 0; t < k; t++){
                 argIn[t] = &args.at(t)[0u];
             }
             argIn[k] = NULL;
         	childPid = fork();
         	if(childPid == 0){
+cout << "in out = " << in << " " << out << endl;
+
+	    dup2(out,1);
+            dup2(in,0);
+cout << "in out = " << in << " " << out << endl;
                execvp(argIn[0], argIn);
                perror(argIn[0]);
                exit(errno);
