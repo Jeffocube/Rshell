@@ -53,13 +53,14 @@ class Connector : public Input{
                 //return lhs execute with outfd 
             }else if(activity == "<"){
                 //code for opposite redirect
-                //string filename = parent->getActivity(i+1);
-                //int newIn = open(filename.c_str(), O_RDONLY);
-                //int dupin = dup(0);
-                
-                //close(0);
-                
-                //dup(stdin);
+                string filename = parent->getActivity(i + 1);
+                int dupIn = dup(0);
+                int newIn = open(filename.c_str(), O_RDONLY);
+                dup2(newIn, 0);
+                parent->execOne(i - 1);
+                close(newIn);
+                dup2(dupIn, 0);
+                return i + 1;
             }else if(activity == "|"){
                 //code for pipe
                 
