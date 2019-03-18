@@ -69,16 +69,20 @@ class Connector : public Input{
                 this->setPass(parent->getInComm(i - 1), 1);
                 parent->setPPass(true, i + 1);
                 return i + 1;
-            }else if(activity == "|"){
+            }else if(activity == "|"){ 
                 //code for pipe
                 int fds[2];
 		
 		pipe(fds);
-		
-		parent->
+		parent->get(i - 1)->out = fds[1];
+		parent->get(i + 1)->in = fds[0];
 	        	
+	
+		
 
-		 
+		//think this works?
+		
+		
             }else if(activity == ">>"){
                 //code for redirect append
                 string filename = parent->getActivity(i+1);
