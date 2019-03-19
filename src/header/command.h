@@ -37,11 +37,8 @@ class commandComp : public Input{
         int execute(int i){
             int numChildren = comm.size();
             for(int j = 0; j < numChildren; j++){
-                if(comm.at(j)->getActivity(j) == "|"){
+                if(comm.at(j)->getActivity(j) == "|" || comm.at(j)->getActivity(j) == ">>" || comm.at(j)->getActivity(j) == ">" ){
                     comm.at(j)->execute(j);
-                }
-                if(comm.at(j)->getActivity(j) == ">" || comm.at(j)->getActivity(j) == ">>"){//modify this so that the out of the object at j - 1 becomes in of > or >>
-                    comm.at(j)->in = comm.at(j - 1)->out;
                 }
             }
             for(int k = 0; k < numChildren; k++){
