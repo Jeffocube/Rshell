@@ -51,38 +51,37 @@ class commandComp : public Input{
                   	if(k < comm.size() && comm.at(k)->getActivity(k) == "|"){
                          k++; 
                      }
-		        }
-          	if (comm.at(k)->getActivity(k) == ">"){
-          			close(outFdStorage);
-                  //cout << "stdout storage = " << stdoutStorage << endl;
-          			dup2(stdoutStorage,1);
-          			k++;
-				
-
-//				cout << "> entered" << endl;
-          		}
-		if (comm.at(k)->getActivity(k) == "<"){
-
-			close(inFdStorage);
-			dup2(stdinStorage, 0);
-			if(k < (comm.size() - 1))
-			k++;
-		//	if (k< (comm.size()))
-	//		k++;
-		}
-		if (comm.at(k)->getActivity(k) == ">>"){
-			close(outFdStorage);
-			dup2(stdoutStorage, 1);
-			k++;
-		
-		}
-//cout << "K: " << k << " numChildren: " << numChildren << endl;	
-		        if (k < numChildren);
-                k = comm.at(k)->execute(k);
-		if (k<numChildren){
-                if(comm.at(p)->getPass() == true)
-                    pass = true;}
-            }
+		            }
+              	if (comm.at(k)->getActivity(k) == ">"){
+              			close(outFdStorage);
+              			dup2(stdoutStorage,1);
+              			k++;
+             		}
+            		if (comm.at(k)->getActivity(k) == "<"){
+            
+            			close(inFdStorage);
+            			dup2(stdinStorage, 0);
+            			if(k < (comm.size() - 1))
+            			k++;
+            		}
+            		if (comm.at(k)->getActivity(k) == ">>"){
+            			  close(outFdStorage);
+            			  dup2(stdoutStorage, 1);
+            			  k++;
+            		}
+    		        if ((k < numChildren && k > 0) && comm.at(k - 1)->getActivity(k) != ">" && comm.at(k - 1)->getActivity(k) != ">>"){
+                    k = comm.at(k)->execute(k);
+                }else if(k == 0){
+                    k = comm.at(k)->execute(k);
+                }
+		            if (k < numChildren){
+                    if(comm.at(p)->getPass() == true)
+                        pass = true;
+                }
+                //if(comm.at(k - 1)->getActivity(k) == ">" || comm.at(k - 1)->getActivity(k) == ">>"){
+                    //k++;
+                //}
+              }
           dup2(stdoutStorage,1);
             dup2(stdinStorage, 0);
             return i;
