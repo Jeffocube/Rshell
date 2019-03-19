@@ -97,10 +97,11 @@ class Connector : public Input{
                 string filename = parent->getActivity(i+1);
                 int dupout = dup(1);
                 int newOut = open(filename.c_str(), O_WRONLY | O_APPEND);
+		parent->outFdStorage = newOut;
+		parent->stdoutStorage = dupout;
+
                 dup2(newOut, 1);
-                parent->execOne(i - 1);
-                close(newOut);
-                dup2(dupout, 1);
+              
                 //dup(newOut);
                 parent->setPPass(true, i + 1);
                 return i+1;

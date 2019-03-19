@@ -66,6 +66,12 @@ class commandComp : public Input{
 			k++;
 			if (k< (comm.size()))
 			k++;
+		}
+		if (comm.at(k)->getActivity(k) == ">>"){
+			close(outFdStorage);
+			dup2(stdoutStorage, 1);
+			k++;
+			k++;
 		}	
 		        if (k < numChildren)
                 k = comm.at(k)->execute(k);
