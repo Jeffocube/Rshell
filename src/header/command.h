@@ -18,6 +18,7 @@ class commandComp : public Input{
     public:
        // int in;
       //  int out;
+        int stdoutStorage;
         int getCommIn(int i){
             return comm.at(i)->in;
         }
