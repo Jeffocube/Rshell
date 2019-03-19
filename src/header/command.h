@@ -19,9 +19,9 @@ class commandComp : public Input{
        // int in;
       //  int out;
         int inFdStorage;
-	int stdinStorage;
+	int stdinStorage = 0;
         int outFdStorage;
-        int stdoutStorage;
+        int stdoutStorage = 1;
         int getCommIn(int i){
             return comm.at(i)->in;
         }
@@ -62,7 +62,10 @@ class commandComp : public Input{
 
 			close(inFdStorage);
 			dup2(stdinStorage, 0);
-			k++;k++;
+			if(k < (comm.size() - 1))
+			k++;
+			if (k< (comm.size() - 1))
+			k++;
 		}	
 		        if (k < numChildren)
                 k = comm.at(k)->execute(k);
