@@ -72,7 +72,7 @@ class commandComp : public Input{
                 if(comm.at(p)->getPass() == true)
                     pass = true;
             }
-          dup2(stdoutStorage,1);
+        //  dup2(stdoutStorage,1);
             dup2(stdinStorage, 0);
             return i;
         }

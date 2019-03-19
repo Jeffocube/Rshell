@@ -54,7 +54,7 @@ class Connector : public Input{
                 
                 return i+1;
 		*/
-                dup2(in, 0);
+       //dup2(in, 0);
             		string outf = parent->getActivity(i + 1);
             		int outFd =  open(outf.c_str(),O_WRONLY);
             		parent->outFdStorage = outFd;
