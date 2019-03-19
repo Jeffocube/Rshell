@@ -64,7 +64,7 @@ class commandComp : public Input{
 			dup2(stdinStorage, 0);
 			if(k < (comm.size() - 1))
 			k++;
-			if (k< (comm.size() - 1))
+			if (k< (comm.size()))
 			k++;
 		}	
 		        if (k < numChildren)
