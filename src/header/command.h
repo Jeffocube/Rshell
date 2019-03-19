@@ -48,7 +48,7 @@ class commandComp : public Input{
             for(int k = 0; k < numChildren; k++){
                 int p = k;
                 if(k < (comm.size() - 1)){
-                  	if(k < comm.size() && comm.at(k)->getActivity(k) == "|" || comm.at(k + 1)->getActivity(k) == "<"){
+                  	if(k < comm.size() && comm.at(k)->getActivity(k) == "|" || comm.at(k)->getActivity(k) == "<"){
                          k++; 
                      }
 		        }
@@ -69,7 +69,7 @@ class commandComp : public Input{
                 if(comm.at(p)->getPass() == true)
                     pass = true;
             }
-          		dup2(stdoutStorage,1);
+          dup2(stdoutStorage,1);
             dup2(stdinStorage, 0);
             return i;
         }
