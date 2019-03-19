@@ -54,19 +54,16 @@ class Connector : public Input{
                 
                 return i+1;
 		*/
-		
-		string outf = parent->getActivity(i + 1);
-		int outFd =  open(outf.c_str(),O_WRONLY);
-		
-		parent->get(i - 1)->out = outFd;
-		int dupout = dup(1);
-		dup2(outFd, 1);
-		parent->execOne(i-1);
-	close(outFd);
-
-//		dup2(dupout, 1);
-
-		return i+1;
+                dup2(in, 0);
+            		string outf = parent->getActivity(i + 1);
+            		int outFd =  open(outf.c_str(),O_WRONLY);
+            		
+            		parent->get(i - 1)->out = outFd;
+            		int dupout = dup(1);
+            		dup2(outFd, 1);
+            	  close(outFd);
+                dup2(dupout, 1);
+		            return i+1;
             }else if(activity == "<"){
                 string filename = parent->getActivity(i + 1);
                 int dupIn = dup(0);

@@ -40,15 +40,13 @@ class commandComp : public Input{
                 if(comm.at(j)->getActivity(j) == "|"){
                     comm.at(j)->execute(j);
                 }
+                if(comm.at(j)->getActivity(j) == ">" || comm.at(j)->getActivity(j) == ">>"){//modify this so that the out of the object at j - 1 becomes in of > or >>
+                    comm.at(j)->in = comm.at(j - 1)->out;
+                }
             }
             for(int k = 0; k < numChildren; k++){
                 int p = k;
                 if(k < (comm.size() - 1)){
-                  if(comm.at(k)->getActivity(k) == "<" ||
-                    comm.at(k)->getActivity(k) == ">"  ||
-                    comm.at(k)->getActivity(k) == ">>"){
-                      k++;
-                  }
                   if(comm.at(k)->getActivity(k) == "|")
                       k++;
                 }
