@@ -82,8 +82,8 @@ class commandComp : public Input{
                     //k++;
                 //}
               }
-          dup2(stdoutStorage,1);
-            dup2(stdinStorage, 0);
+        //  dup2(stdoutStorage,1);
+        //    dup2(stdinStorage, 0);
             return i;
         }
         int execOne(int i){
