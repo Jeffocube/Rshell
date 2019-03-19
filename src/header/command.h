@@ -44,9 +44,9 @@ class commandComp : public Input{
             for(int k = 0; k < numChildren; k++){
                 int p = k;
                 if(k < (comm.size() - 1)){
-                  if(comm.at(k + 1)->getActivity(k) == "<" ||
-                    comm.at(k + 1)->getActivity(k) == ">"  ||
-                    comm.at(k + 1)->getActivity(k) == ">>"){
+                  if(comm.at(k)->getActivity(k) == "<" ||
+                    comm.at(k)->getActivity(k) == ">"  ||
+                    comm.at(k)->getActivity(k) == ">>"){
                       k++;
                   }
                   if(comm.at(k)->getActivity(k) == "|")
