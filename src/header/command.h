@@ -48,7 +48,7 @@ class commandComp : public Input{
             for(int k = 0; k < numChildren; k++){
                 int p = k;
                 if(k < (comm.size() - 1)){
-                  	if(k < comm.size() && comm.at(k)->getActivity(k) == "|" || comm.at(k)->getActivity(k) == "<"){
+                  	if(k < comm.size() && comm.at(k)->getActivity(k) == "|"){
                          k++; 
                      }
 		        }
@@ -56,7 +56,10 @@ class commandComp : public Input{
           			close(outFdStorage);
                   //cout << "stdout storage = " << stdoutStorage << endl;
           			dup2(stdoutStorage,1);
-          			k++;k++;
+          			k++;
+				
+
+//				cout << "> entered" << endl;
           		}
 		if (comm.at(k)->getActivity(k) == "<"){
 
@@ -64,21 +67,23 @@ class commandComp : public Input{
 			dup2(stdinStorage, 0);
 			if(k < (comm.size() - 1))
 			k++;
-			if (k< (comm.size()))
-			k++;
+		//	if (k< (comm.size()))
+	//		k++;
 		}
 		if (comm.at(k)->getActivity(k) == ">>"){
 			close(outFdStorage);
 			dup2(stdoutStorage, 1);
 			k++;
-			k++;
-		}	
-		        if (k < numChildren)
+		
+		}
+//cout << "K: " << k << " numChildren: " << numChildren << endl;	
+		        if (k < numChildren);
                 k = comm.at(k)->execute(k);
+		if (k<numChildren){
                 if(comm.at(p)->getPass() == true)
-                    pass = true;
+                    pass = true;}
             }
-        //  dup2(stdoutStorage,1);
+          dup2(stdoutStorage,1);
             dup2(stdinStorage, 0);
             return i;
         }
