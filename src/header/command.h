@@ -18,6 +18,8 @@ class commandComp : public Input{
     public:
        // int in;
       //  int out;
+        int inFdStorage;
+	int stdinStorage;
         int outFdStorage;
         int stdoutStorage;
         int getCommIn(int i){
@@ -39,7 +41,7 @@ class commandComp : public Input{
         int execute(int i){
             int numChildren = comm.size();
             for(int j = 0; j < numChildren; j++){
-                if(comm.at(j)->getActivity(j) == "|" || comm.at(j)->getActivity(j) == ">>" || comm.at(j)->getActivity(j) == ">" ){
+                if(comm.at(j)->getActivity(j) == "|" || comm.at(j)->getActivity(j) == ">>" || comm.at(j)->getActivity(j) == ">" || comm.at(j)->getActivity(j) == "<"){
                     comm.at(j)->execute(j);
                 }
             }
@@ -55,14 +57,20 @@ class commandComp : public Input{
                   //cout << "stdout storage = " << stdoutStorage << endl;
           			dup2(stdoutStorage,1);
           			k++;k++;
-          		}	
+          		}
+		if (comm.at(k)->getActivity(k) == "<"){
+
+			close(inFdStorage);
+			dup2(stdinStorage, 0);
+			k++;k++;
+		}	
 		        if (k < numChildren)
                 k = comm.at(k)->execute(k);
                 if(comm.at(p)->getPass() == true)
                     pass = true;
             }
-          			dup2(stdoutStorage,1);
-            
+          		dup2(stdoutStorage,1);
+            dup2(stdinStorage, 0);
             return i;
         }
         int execOne(int i){

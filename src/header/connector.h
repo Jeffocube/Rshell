@@ -67,15 +67,18 @@ class Connector : public Input{
             }else if(activity == "<"){
                 string filename = parent->getActivity(i + 1);
                 int dupIn = dup(0);
+		parent->stdinStorage = dupIn;
                 int newIn = open(filename.c_str(), O_RDONLY);
+		parent->inFdStorage = newIn;
+		
                 if(newIn == -1)
                     return i + 1;
                 dup2(newIn, 0);
-                parent->execOne(i - 1);
-                close(newIn);
-                dup2(dupIn, 0);
-                this->setPass(parent->getInComm(i - 1), 1);
-                parent->setPPass(true, i + 1);
+               // parent->execOne(i - 1);
+               // close(newIn);
+                //dup2(dupIn, 0);
+                //this->setPass(parent->getInComm(i - 1), 1);
+               // parent->setPPass(true, i + 1);
                 return i + 1;
             }else if(activity == "|"){ 
                 //code for pipe
