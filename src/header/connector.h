@@ -56,15 +56,15 @@ class Connector : public Input{
 		*/
 		
 		string outf = parent->getActivity(i + 1);
-		int outFd =  open(outf.c_str(),O_WRONLY| O_TRUNC | O_CREAT, S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
+		int outFd =  open(outf.c_str(),O_WRONLY);
 		
 		parent->get(i - 1)->out = outFd;
 		int dupout = dup(1);
 		dup2(outFd, 1);
 		parent->execOne(i-1);
-		close(outFd);
+	close(outFd);
 
-		dup2(dupout, 1);
+//		dup2(dupout, 1);
 
 		return i+1;
             }else if(activity == "<"){
