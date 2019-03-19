@@ -18,6 +18,7 @@ class commandComp : public Input{
     public:
        // int in;
       //  int out;
+        int outFdStorage;
         int stdoutStorage;
         int getCommIn(int i){
             return comm.at(i)->in;
@@ -45,10 +46,16 @@ class commandComp : public Input{
             for(int k = 0; k < numChildren; k++){
                 int p = k;
                 if(k < (comm.size() - 1)){
-                  if(comm.at(k)->getActivity(k) == "|")
-                      k++;
-                }
-           
+                  	if(comm.at(k)->getActivity(k) == "|")
+                     { k++; }
+		}
+          	if (comm.at(k)->getActivity(k) == ">"){
+			close(outFdStorage);
+cout << "stdout storage = " << stdoutStorage << endl;
+			dup2(stdoutStorage,1);
+			k++;k++;
+		}	
+		if (k < numChildren)
                 k = comm.at(k)->execute(k);
                 if(comm.at(p)->getPass() == true)
                     pass = true;
