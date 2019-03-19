@@ -46,20 +46,23 @@ class commandComp : public Input{
             for(int k = 0; k < numChildren; k++){
                 int p = k;
                 if(k < (comm.size() - 1)){
-                  	if(comm.at(k)->getActivity(k) == "|")
-                     { k++; }
-		}
+                  	if(comm.at(k)->getActivity(k) == "|" || comm.at(k)->getActivity(k) == "<"){
+                         k++; 
+                     }
+		        }
           	if (comm.at(k)->getActivity(k) == ">"){
-			close(outFdStorage);
-cout << "stdout storage = " << stdoutStorage << endl;
-			dup2(stdoutStorage,1);
-			k++;k++;
-		}	
-		if (k < numChildren)
+          			close(outFdStorage);
+                  //cout << "stdout storage = " << stdoutStorage << endl;
+          			dup2(stdoutStorage,1);
+          			k++;k++;
+          		}	
+		        if (k < numChildren)
                 k = comm.at(k)->execute(k);
                 if(comm.at(p)->getPass() == true)
                     pass = true;
             }
+          			dup2(stdoutStorage,1);
+            
             return i;
         }
         int execOne(int i){
@@ -137,7 +140,7 @@ class commandLeaf : public Input{
             argIn[k] = NULL;
         	childPid = fork();
         	if(childPid == 0){
-            cout << "in out = " << in << " " << out << endl;
+            //cout << "in out = " << in << " " << out << endl;
             
             	    dup2(out,1);
                         dup2(in,0);

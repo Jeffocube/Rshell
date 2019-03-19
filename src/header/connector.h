@@ -60,7 +60,7 @@ class Connector : public Input{
             		parent->outFdStorage = outFd;
             		parent->get(i - 1)->out = outFd;
             		int dupout = dup(1);
-			parent->stdoutStorage = dupout;
+			          parent->stdoutStorage = dupout;
             		dup2(outFd, 1);
             	  
 		            return i+1;
@@ -81,11 +81,11 @@ class Connector : public Input{
                 //code for pipe
               		
               		pipe(pipeEnds);
-                  cout << "pipeEnds1 = " << pipeEnds[0] << " two = " << pipeEnds[1] << endl;
+                  //cout << "pipeEnds1 = " << pipeEnds[0] << " two = " << pipeEnds[1] << endl;
               		parent->get(i - 1)->out = pipeEnds[1];
               		parent->get(i + 1)->in = pipeEnds[0];
-                 cout << parent->get(i - 1)->out << endl;
-                 cout << parent->get(i + 1)->in << endl;
+                 //cout << parent->get(i - 1)->out << endl;
+                 //cout << parent->get(i + 1)->in << endl;
               
               		return i; 
 		         
